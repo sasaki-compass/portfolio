@@ -1,0 +1,83 @@
+* {
+  font-size: min(4vw,20px);
+}
+body{
+    width: 100%;
+}
+.header li{
+  text-align: center;
+}
+.gnav a,.gnav-menu a{
+  color:var(--white);
+}
+.gnav a:hover,
+.gnav-menu a:hover{
+  color:var(--black);
+}
+.gnav-menu li {
+    width: 100%;
+    text-align: center;
+}
+
+.home h1{
+        margin: 10vh auto 0px;
+    }
+.home .mv h2{
+    z-index: 90;
+}
+.home .godown{
+        padding-bottom: min(8vw, 108px);
+}
+.about-list{
+    padding:0 min(4vw,20px) min(10vw,50px);
+}
+.skillsheet .download{
+    margin: min(4vw, 16px) auto min(5vw, 20px);
+}
+.contact{
+    padding-bottom:min(15vw,100px);
+}
+
+/*work*/
+.work__result{
+    background:#fff;
+    color:#000;
+    width: min(100%, 500px);
+    margin: min(4vw, 20px) auto;
+    padding: min(2vw, 8px) min(6vw, 28px);
+}
+.work__list{
+    text-align: left;
+    list-style: disc;
+    padding-left: min(4vw,16px);
+}
+.slick-arrow{
+    z-index: 10;
+}
+@media screen and (min-width:768px){
+    * {
+    font-size: 20px;
+    }
+    .container{
+        /*height: min(80vw, 960px);*/
+    }
+    .home h1{
+        margin: 20vh auto 0px;
+    }
+    .about-list{
+        position: relative;
+        margin: 10px auto 0;
+    }
+    .profile{
+        height: min(80vw, 800px);
+    }
+    .contents--profile{
+        padding:  min(8vw, 108px) 0;
+    }
+    .timeline{
+        height: min(90vw, 630px);
+    }
+    .home .godown{
+        padding-bottom: 0;
+    }
+}
