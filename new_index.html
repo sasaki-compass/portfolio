@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Site — Wireframe (Responsive)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    /*--bg:#f4f4f5;*/
+    --bg:#ffffff;
+    --surface-0:#ffffff;
+    --surface-1:#f7f7f8;
+    --surface-2:#eeeef0;
+    --border:#d8d8dc;
+    --border-strong:#b9b9c0;
+    --text-primary:#1f1f23;
+    --text-secondary:#5b5b63;
+    --text-muted:#9a9aa2;
+    --accent:#6b6bf2;
+    --radius:8px;
+    --radius-lg:14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--text-primary);
+    padding:24px 12px 60px;
+  }
+  .mode-flag{
+    max-width:1040px;
+    margin:0 auto 14px;
+    text-align:center;
+    font-size:11px;
+    color:var(--text-secondary);
+    border:1px dashed var(--border-strong);
+    border-radius:var(--radius);
+    padding:6px 10px;
+  }
+  .mode-flag b{color:var(--text-primary);}
+  .page{
+    max-width:1040px;
+    margin:0 auto;
+    border:1px solid var(--border-strong);
+    border-radius:16px;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--surface-1) 0%, var(--surface-2) 42%, var(--surface-1) 100%);
+    position:relative;
+  }
+  .bg-note{
+    position:absolute; top:8px; right:8px; z-index:2;
+    font-size:9px; color:var(--text-muted);
+    border:1px dashed var(--border-strong); border-radius:var(--radius);
+    padding:3px 8px; background:var(--surface-0);
+  }
+  section, header, footer{ position:relative; z-index:1; }
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 20px; height:56px; border-bottom:1px solid var(--border);
+  }
+  .logo{ font-size:13px; font-weight:600; }
+  nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-secondary); }
+  .resume-btn{
+    display:none;
+    border:1px solid var(--border-strong); border-radius:var(--radius);
+    padding:4px 12px; font-size:11px; color:var(--text-secondary);
+  }
+  .hamburger{ font-size:20px; color:var(--text-secondary); cursor:pointer; }
+
+  .mobile-nav-menu{
+    display:none; flex-direction:column;
+    border-bottom:1px solid var(--border);
+    background:var(--surface-0);
+  }
+  .mobile-nav-menu.open{ display:flex; }
+  .mobile-nav-menu a{
+    padding:12px 20px; font-size:13px; color:var(--text-secondary);
+    text-decoration:none; border-top:1px solid var(--border);
+  }
+  .mobile-nav-menu a i{ margin-right:8px; font-size:14px; color:var(--text-muted); }
+
+  /* ---------- FV ---------- */
+  .fv{
+    height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px; border-bottom:1px solid var(--border); text-align:center; padding:0 16px;
+    background:url(img/fv_ai.png) no-repeat center/cover;
+  }
+  .fv .eyebrow{ font-size:11px; color:var(--text-muted); letter-spacing:1px; }
+  .fv .name{ font-size:28px; font-weight:600; }
+  .fv .role{ font-size:13px; color:var(--text-secondary); }
+  .fv .scroll{ margin-top:10px; font-size:10px; color:var(--text-muted); display:flex; align-items:center; gap:4px; }
+
+  /* ---------- Bento ---------- */
+  .bento-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); }
+  .section-label{ font-size:11px; color:var(--text-muted); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+  .badge{ font-size:9px; border:1px solid var(--border-strong); border-radius:var(--radius); padding:1px 6px; color:var(--text-secondary); }
+
+  .bento{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+  .cell{
+    border:1px solid var(--border-strong); border-radius:12px; background:var(--surface-2);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    min-height:64px; padding:8px; text-align:center;
+  }
+  .cell i{ font-size:16px; color:var(--text-secondary); }
+  .cell span.label{ font-size:11px; color:var(--text-primary); }
+  .cell span.sub{ font-size:9px; color:var(--text-muted); }
+  .cell.skills{ grid-column: 1 / span 2; min-height:100px; }
+  .cell.profile{ grid-column: 1 / span 2; }
+  .cell.stat-num{ font-size:17px; font-weight:600; color:var(--text-primary); }
+  .cell.skills{ align-items:flex-start; text-align:left; padding:14px; }
+  .cell.skills .label{ display:flex; align-items:center; gap:6px; }
+  .skills-list{ margin:6px 0 0; padding-left:18px; font-size:11px; color:var(--text-secondary); text-align:left; width:100%; }
+  .skills-list li{ margin-bottom:3px; }
+
+  .contact-field{
+    border:1px solid var(--border); border-radius:var(--radius);
+    padding:6px 10px; font-size:11px; color:var(--text-muted); width:100%;
+  }
+  .contact-field.short{ width:60%; }
+
+  /* ---------- Works ---------- */
+  .works-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:12px; }
+  .work-card{
+    border:1px solid var(--border-strong); border-radius:12px; padding:14px;
+    display:flex; flex-direction:column; gap:8px;
+    background:rgba(238,238,240,0.55); backdrop-filter:blur(1px);
+  }
+  .work-thumb{
+    width:100%; height:100px; border:1px dashed var(--border-strong); border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:18px;
+  }
+  .work-title{ font-size:13px; font-weight:500; }
+  .bar{ height:6px; background:var(--border); border-radius:2px; }
+  .bar.w90{ width:90%; } .bar.w70{ width:70%; }
+  .tags{ display:flex; gap:6px; flex-wrap:wrap; }
+  .tag{ font-size:10px; color:var(--text-secondary); border:1px solid var(--border); border-radius:var(--radius); padding:2px 8px; }
+  .figma-link{ font-size:11px; color:var(--accent); display:flex; align-items:center; gap:4px; }
+  .repeat-note{ text-align:center; font-size:11px; color:var(--text-muted); }
+
+  /* ---------- Sample works ---------- */
+  .sample-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); }
+  .sample-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  .sample-card{
+    border:1px dashed var(--border-strong); border-radius:12px; padding:10px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .sample-thumb{
+    width:100%; height:64px; border:1px dashed var(--border-strong); border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:16px;
+  }
+  .sample-name{ font-size:11px; color:var(--text-primary); }
+
+  /* ---------- Figma gallery ---------- */
+  .figma-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); }
+  .figma-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  .figma-card{
+    border:1px solid var(--border-strong); border-radius:12px; padding:8px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .figma-thumb{
+    width:100%; height:56px; border:1px dashed var(--border-strong); border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:14px;
+  }
+  .figma-name{ font-size:10px; color:var(--text-primary); }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
+  .contact-lines{ display:flex; flex-direction:column; gap:6px; }
+  .contact-title{ font-size:12px; }
+  .contact-bar{ height:8px; background:var(--border); border-radius:2px; }
+  .contact-bar.short{ width:60%; }
+  .pdf-btn{
+    border:1px solid var(--border-strong); border-radius:var(--radius); padding:8px 14px;
+    font-size:11px; color:var(--text-secondary); display:flex; align-items:center; gap:6px; width:fit-content;
+  }
+  .sns{ display:flex; gap:14px; color:var(--text-muted); font-size:16px; }
+
+  /* =========================================================
+     BREAKPOINT: mobile-first base above, desktop overrides below
+     ========================================================= */
+  @media (min-width: 769px){
+    .mode-mobile{ display:none !important; }
+    .mode-desktop{ display:inline !important; }
+
+    nav.desktop-nav{ display:flex; }
+    .resume-btn{ display:flex; align-items:center; }
+    .hamburger{ display:none; }
+    .mobile-nav-menu{ display:none !important; }
+
+    .fv{ height:280px; }
+    .fv .name{ font-size:36px; }
+    .fv .role{ font-size:15px; }
+
+    .bento{ grid-template-columns: repeat(4, 1fr); grid-auto-rows:84px; }
+    .cell.skills{ grid-column:1 / span 2; grid-row:1 / span 2; }
+    .cell.availability{ grid-column:3; grid-row:1; }
+    .cell.github{ grid-column:4; grid-row:1; }
+    .cell.profile{ grid-column:3 / span 2; grid-row:2; }
+    .cell.gif-banner{ grid-column:1; grid-row:3; }
+    .cell.static-banner{ grid-column:2; grid-row:3; }
+    .cell.exp-years{ grid-column:3; grid-row:3; }
+    .cell.strength{ grid-column:4; grid-row:3; }
+
+    .work-card{ flex-direction:row; gap:18px; }
+    .work-thumb{ width:200px; height:120px; flex-shrink:0; }
+    .work-body{ flex:1; display:flex; flex-direction:column; gap:8px; justify-content:center; }
+
+    .sample-grid{ grid-template-columns: repeat(3, 1fr); }
+    .figma-grid{ grid-template-columns: repeat(4, 1fr); }
+
+    footer{ flex-direction:row; justify-content:space-between; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="mode-flag">
+    現在の表示モード：
+    <b class="mode-mobile">モバイル（〜768px）</b>
+    <b class="mode-desktop" style="display:none;">デスクトップ（769px〜）</b>
+    ／ブラウザ幅を変えると自動で切り替わります
+  </div>
+
+  <div class="page">
+    <!--div class="bg-note">全ページ共通の固定背景（グラデーション/画像）</div-->
+
+    <header>
+      <div class="logo">SASAKI WEB WORK / Hiroshi</div>
+      <nav class="desktop-nav">
+        <span>About</span><span>Works</span><span>Contact</span>
+      </nav>
+      <i class="ti ti-menu-2 hamburger" id="hamburgerBtn" aria-hidden="true"></i>
+      <div class="resume-btn"><i class="ti ti-download" style="font-size:13px; margin-right:6px;" aria-hidden="true"></i>Resume DL</div>
+    </header>
+
+    <nav class="mobile-nav-menu" id="mobileNavMenu">
+      <a href="#about"><i class="ti ti-user" aria-hidden="true"></i>About</a>
+      <a href="#works"><i class="ti ti-layout-grid" aria-hidden="true"></i>Works</a>
+      <a href="#contact"><i class="ti ti-mail" aria-hidden="true"></i>Contact</a>
+    </nav>
+
+    <section class="fv">
+      <div class="eyebrow">FV — first view</div>
+      <div class="name">SASAKI RYOTA</div>
+      <div class="role">Web Coder / Frontend Engineer</div>
+      <div class="scroll"><i class="ti ti-chevron-down" aria-hidden="true"></i>scroll</div>
+    </section>
+
+    <section class="bento-wrap">
+      <div class="section-label">Bento grid area</div>
+      <div class="bento">
+        <div class="cell skills">
+          <span class="label"><i class="ti ti-code" aria-hidden="true"></i>Skills</span>
+          <ul class="skills-list">
+            <li>HTML/CSS — 14年</li>
+            <li>JavaScript — 6年</li>
+            <li>PHP — 12年</li>
+            <li>Figma — 4年</li>
+          </ul>
+        </div>
+        <div class="cell availability">
+          <i class="ti ti-circle-dot" aria-hidden="true"></i>
+          <span class="label">稼働状況</span>
+          <span class="sub">現在即時対応可能</span>
+        </div>
+        <div class="cell github">
+          <i class="ti ti-brand-github" aria-hidden="true"></i>
+          <span class="label">GitHub</span>
+          <span class="sub"><a target="_blank" href="https://github.com/sasaki-compass/portfolio.git">Portfolio</a> / 2026</span>
+        </div>
+        <div class="cell profile">
+          <i class="ti ti-user" aria-hidden="true"></i>
+          <span class="label">Profile summary</span>
+          <span class="sub">Webコーダー・フロントエンドエンジニア14年目／UI実装〜デザインまで対応</span>
+        </div>
+        <div class="cell gif-banner">
+          <i class="ti ti-player-play" aria-hidden="true"></i>
+          <span class="label">GIFバナー</span>
+          <ul class="skills-list">
+            <li>
+              <img src="img/banner/gif_banner_01.gif" width="" height="" alt="WebサービスGiFバナー制作サンプル">
+              <span class="sub">WebサービスGiFバナー制作サンプル</span>
+            </li>
+            <li>
+              <img src="img/banner/gif_banner_02.gif" width="" height="" alt="WebサービスGiFバナー制作サンプル">
+              <span class="sub">WebサービスGiFバナー制作サンプル</span>
+            </li>
+            <li>JavaScript — 6年</li>
+        </div>
+        <div class="cell static-banner">
+          <i class="ti ti-photo" aria-hidden="true"></i>
+          <span class="label">静止画バナー</span>
+          <ul>
+            <li>
+              <img src="img/banner/chojo.png" width="" height="" alt="新商品リリース告知バナー制作サンプル">
+              <span class="sub">例：新商品リリース告知</span>
+            </li>
+          </ul>
+        </div>
+        <div class="cell exp-years">
+          <span class="stat-num">14年</span>
+          <span class="sub">経験年数</span>
+        </div>
+        <div class="cell strength">
+          <i class="ti ti-star" aria-hidden="true"></i>
+          <span class="label">得意分野</span>
+          <span class="sub">Figma設計</span>
+          <span class="sub">JSやCSSでのアニメーション実装</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="works-wrap">
+      <div class="section-label">Works — 実務実績（背景を透過するグラスカード）</div>
+
+      <div class="work-card">
+        <div class="work-thumb"><i class="ti ti-photo" aria-hidden="true"></i></div>
+        <div class="work-body">
+          <div class="work-title">ABCコーポレートサイト リニューアル</div>
+          <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">企業サイトのリニューアル案件。旧CMSのサポート終了に伴い、新規CMS（ヘッドレスCMS+SSG）への移行にあたってのデータ整備を担当。</div>
+          <div class="tags">
+            <span class="tag">コーディング／UI設計</span>
+            <span class="tag">Directus, JSX</span>
+          </div>
+          <div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb"><i class="ti ti-photo" aria-hidden="true"></i></div>
+        <div class="work-body">
+          <div class="work-title">ABCコーポレートサイト リニューアル</div>
+          <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">企業サイトのリニューアル案件。旧CMSのサポート終了に伴い、新規CMS（ヘッドレスCMS+SSG）への移行にあたってのデータ整備を担当。</div>
+          <div class="tags">
+            <span class="tag">コーディング／UI設計</span>
+            <span class="tag">Directus, JSX</span>
+          </div>
+          <div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div>
+        </div>
+      </div>
+      <!--div class="repeat-note">︙ 実務案件を縦に繰り返し</div-->
+    </section>
+
+    <section class="sample-wrap">
+      <div class="section-label">サンプル制作 <span class="badge">実在しないデモ</span></div>
+      <div class="sample-grid">
+        <div class="sample-card">
+          <div class="sample-thumb"><img src="img/thumb_wp_radio.png" alt="架空ラジオ局サイト" class="ti ti-photo" aria-hidden="true"></i></div>
+          <div class="sample-name">架空ラジオ局サイト</div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-thumb"><img src="img/thumb_akebi.png" alt="架空自治体サイト" class="ti ti-photo" aria-hidden="true"></i></div>
+          <div class="sample-name">架空自治体サイト</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="figma-wrap">
+      <div class="section-label">Figma gallery — デザイン制作事例</div>
+      <div class="figma-grid">
+        <div class="figma-card">
+          <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
+          <div class="figma-name">例：ECサイト UIデザイン案</div>
+        </div>
+        <div class="figma-card">
+          <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
+          <div class="figma-name">例：コーポレートサイト ワイヤーフレーム</div>
+        </div>
+        <div class="figma-card">
+          <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
+          <div class="figma-name">例：モバイルアプリ UIキット</div>
+        </div>
+        <div class="figma-card">
+          <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
+          <div class="figma-name">例：LPデザイン案</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="contact-lines">
+        <div class="contact-title">Contact</div>
+        <div class="contact-field">お名前</div>
+        <div class="contact-field">メールアドレス</div>
+        <div class="contact-field short">ご相談内容</div>
+      </div>
+      <div class="pdf-btn"><i class="ti ti-download" aria-hidden="true"></i>スキルシート PDF</div>
+      <div class="sns">
+        <i class="ti ti-brand-github" aria-hidden="true"></i>
+        <i class="ti ti-brand-x" aria-hidden="true"></i>
+        <i class="ti ti-mail" aria-hidden="true"></i>
+      </div>
+    </footer>
+  </div>
+
+<script>
+  function updateModeFlag(){
+    var isDesktop = window.innerWidth > 768;
+    document.querySelectorAll('.mode-mobile').forEach(function(el){ el.style.display = isDesktop ? 'none' : 'inline'; });
+    document.querySelectorAll('.mode-desktop').forEach(function(el){ el.style.display = isDesktop ? 'inline' : 'none'; });
+  }
+  window.addEventListener('resize', updateModeFlag);
+  updateModeFlag();
+
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var mobileNavMenu = document.getElementById('mobileNavMenu');
+  hamburgerBtn.addEventListener('click', function(){
+    mobileNavMenu.classList.toggle('open');
+    hamburgerBtn.classList.toggle('ti-menu-2');
+    hamburgerBtn.classList.toggle('ti-x');
+  });
+  window.addEventListener('resize', function(){
+    if (window.innerWidth > 768){ mobileNavMenu.classList.remove('open'); }
+  });
+</script>
+
+</body>
+</html>
