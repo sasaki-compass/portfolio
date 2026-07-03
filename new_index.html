@@ -24,11 +24,11 @@
 body{
   margin:0;
   background:var(--bg);
-  background-image:url('img/bg.jpeg');
   font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",-apple-system,BlinkMacSystemFont,sans-serif;
   color:var(--text-primary);
   padding:24px 12px 60px;
-}
+  background:url(img/bg.jpeg);
+}/*
 .mode-flag{
   max-width:1040px;
   margin:0 auto 14px;
@@ -39,7 +39,7 @@ body{
   border-radius:var(--radius);
   padding:6px 10px;
 }
-.mode-flag b{color:var(--text-primary);}
+.mode-flag b{color:var(--text-primary);}*/
 .page{
   max-width:1040px;
   margin:0 auto;
@@ -58,6 +58,11 @@ header{
 }
 .logo{ font-size:13px; font-weight:600; }
 nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-secondary); }
+nav.desktop-nav a{
+  text-decoration:none; color:var(--text-secondary); 
+  background:var(--surface-0); padding:6px 12px; border-radius:var(--radius);
+  border:1px solid var(--border-strong);
+}
 .resume-btn{
   display:none;
   border:1px solid var(--border-strong); border-radius:var(--radius);
@@ -116,9 +121,7 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 }
 .contact-field.short{ width:60%; }
 
-/* ---------- Banner carousel (GIF / static) ----------
-   FIX: was a plain <ul> list (images stacked, unclosed tag).
-   Now a real single-slide-at-a-time carousel driven by JS below. */
+/* ---------- Banner carousel (GIF / static) ---------- */
 .cell.gif-banner,
 .cell.static-banner{
   align-items:stretch;
@@ -130,34 +133,41 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
   position:relative;
   width:100%;
   flex:1;
+  display:flex;
+  flex-direction:column;
   overflow:hidden;
   border-radius:var(--radius);
   background:var(--surface-1);
+  min-height:90px;
 }
 .carousel-track{
   display:flex;
-  height:100%;
+  flex:1;
   transition:transform .4s ease;
 }
 .carousel-slide{
   min-width:100%;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-  padding:4px;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px;
 }
-/* FIX: this is the core rule that makes thumbnails fit their frame */
+/* image fills whatever height the carousel/cell has — this is what makes the
+   banner grow taller automatically when the desktop grid row is made taller */
 .carousel-slide img{
   width:100%;
-  /*height:64px;*/
-  height:auto;
+  flex:1;
   object-fit:cover;
-  border-radius:var(--radius);
   display:block;
+  cursor:zoom-in;
+  max-height:100%;
 }
-.carousel-slide .sub{ font-size:9px; color:var(--text-muted); text-align:center; }
+.carousel-slide .sub{ font-size:9px; color:var(--text-muted); text-align:center; padding:4px 2px; }
 .carousel-dots{
   display:flex; justify-content:center; gap:4px; margin-top:6px;
 }
@@ -166,6 +176,34 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
   background:var(--border-strong); padding:0; cursor:pointer;
 }
 .carousel-dots button.active{ background:var(--accent); }
+
+/* ---------- Lightbox (click/tap a banner image to view large + caption) ---------- */
+.lightbox-overlay{
+  display:none;
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.82);
+  align-items:center; justify-content:center;
+  z-index:999;
+  padding:32px 20px;
+}
+.lightbox-overlay.open{ display:flex; }
+.lightbox-content{
+  position:relative;
+  max-width:92vw; max-height:88vh;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+}
+.lightbox-content img{
+  max-width:92vw; max-height:76vh;
+  object-fit:contain;
+  border-radius:var(--radius);
+  background:#000;
+}
+.lightbox-caption{ color:#fff; font-size:13px; text-align:center; }
+.lightbox-close{
+  position:absolute; top:-38px; right:0;
+  background:none; border:none; color:#fff;
+  font-size:30px; line-height:1; cursor:pointer; padding:4px 8px;
+}
 
 /* ---------- Works ---------- */
 .works-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:12px; }
@@ -178,14 +216,15 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
   width:100%; height:100px; border:1px dashed var(--border-strong); border-radius:var(--radius);
   display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:18px;
   overflow:hidden;
-  background:var(--surface-0);
+  background: var(--bg);
 }
-/* FIX: img sizing rule was missing for real thumbnails */
-.work-thumb img{ width:auto; height:50%; object-fit:cover; display:block; }
+.work-thumb .work-icon{ width:50%; height:100%; /*object-fit:cover;*/ display:block; }
+.work-thumb .work-image{ width:100%; height:auto; /*object-fit:cover;*/ display:block; }
 .work-title{ font-size:13px; font-weight:500; }
 .tags{ display:flex; gap:6px; flex-wrap:wrap; }
 .tag{ font-size:10px; color:var(--text-secondary); border:1px solid var(--border); border-radius:var(--radius); padding:2px 8px; }
 .figma-link{ font-size:11px; color:var(--accent); display:flex; align-items:center; gap:4px; }
+.figma-link a{ color:var(--accent); text-decoration:none; }
 
 /* ---------- Sample works ---------- */
 .sample-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); }
@@ -195,14 +234,13 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
   display:flex; flex-direction:column; gap:8px;
 }
 .sample-thumb{
-  width:100%;
-  /*height:80px;*/
+  width:100%; 
+  /*height:80px;*/ 
   height:auto;
   border:1px dashed var(--border-strong); border-radius:var(--radius);
   display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:16px;
   overflow:hidden;
 }
-/* FIX: img sizing rule was missing here too — this is why thumbnails overflowed the frame */
 .sample-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 .sample-name{ font-size:11px; color:var(--text-primary); }
 
@@ -247,19 +285,30 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
   .fv .name{ font-size:36px; }
   .fv .role{ font-size:15px; }
 
-  .bento{ grid-template-columns: repeat(4, 1fr); grid-auto-rows:84px; }
+  /* NOTE: 4th row added and made much taller (240px) specifically for the
+     two banner cards, and each banner now spans 2 columns (= half the
+     bento's total width) instead of 1. */
+  .bento{
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 84px 84px 64px 240px;
+  }
   .cell.skills{ grid-column:1 / span 2; grid-row:1 / span 2; }
   .cell.availability{ grid-column:3; grid-row:1; }
   .cell.github{ grid-column:4; grid-row:1; }
   .cell.profile{ grid-column:3 / span 2; grid-row:2; }
-  .cell.gif-banner{ grid-column:1; grid-row:3; }
-  .cell.static-banner{ grid-column:2; grid-row:3; }
-  .cell.exp-years{ grid-column:3; grid-row:3; }
-  .cell.strength{ grid-column:4; grid-row:3; }
+  .cell.exp-years{ grid-column:1; grid-row:3; }
+  .cell.strength{ grid-column:2; grid-row:3; }
+  .cell.gif-banner{ grid-column:1 / span 2; grid-row:4; }
+  .cell.static-banner{ grid-column:3 / span 2; grid-row:4; }
+
+  .carousel-slide img{
+    max-height:150px;
+  }
 
   .work-card{ flex-direction:row; gap:18px; }
   .work-thumb{ width:200px; height:120px; flex-shrink:0; }
   .work-body{ flex:1; display:flex; flex-direction:column; gap:8px; justify-content:center; }
+  .work-thumb .work-icon{ height:auto; }
 
   .sample-grid{ grid-template-columns: repeat(3, 1fr); }
   .figma-grid{ grid-template-columns: repeat(4, 1fr); }
@@ -282,10 +331,12 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
   <header>
     <div class="logo">SASAKI WEB WORK / Hiroshi</div>
     <nav class="desktop-nav">
-      <span>About</span><span>Works</span><span>Contact</span>
+      <a href="#about"><span>About</span></a>
+      <a href="#works"><span>Works</span></a>
+      <a href="#contact"><span>Contact</span></a>
     </nav>
     <i class="ti ti-menu-2 hamburger" id="hamburgerBtn" aria-hidden="true"></i>
-    <div class="resume-btn"><i class="ti ti-download" style="font-size:13px; margin-right:6px;" aria-hidden="true"></i>Resume DL</div>
+    <!--div class="resume-btn"><i class="ti ti-download" style="font-size:13px; margin-right:6px;" aria-hidden="true"></i>Resume DL</div-->
   </header>
 
   <nav class="mobile-nav-menu" id="mobileNavMenu">
@@ -296,12 +347,12 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
 
   <section class="fv">
     <div class="eyebrow">FV — first view</div>
-    <div class="name">SASAKI RYOTA</div>
+    <div class="name">SASAKI WEB WORK</div>
     <div class="role">Web Coder / Frontend Engineer</div>
     <div class="scroll"><i class="ti ti-chevron-down" aria-hidden="true"></i>scroll</div>
   </section>
 
-  <section class="bento-wrap">
+  <section id="about" class="bento-wrap">
     <div class="section-label">Bento grid area</div>
     <div class="bento">
 
@@ -333,8 +384,18 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
         <span class="sub">Webコーダー・フロントエンドエンジニア14年目／UI実装〜デザインまで対応</span>
       </div>
 
-      <!-- FIX: <ul> was never closed and had a stray leftover <li>, which broke
-           the rest of the bento grid's DOM structure. Rebuilt as a working carousel. -->
+      <div class="cell exp-years">
+        <span class="stat-num">14年</span>
+        <span class="sub">経験年数</span>
+      </div>
+
+      <div class="cell strength">
+        <i class="ti ti-star" aria-hidden="true"></i>
+        <span class="label">得意分野</span>
+        <span class="sub">Figma設計</span>
+        <span class="sub">JSやCSSでのアニメーション実装</span>
+      </div>
+
       <div class="cell gif-banner">
         <span class="label"><i class="ti ti-player-play" aria-hidden="true"></i>GIFバナー</span>
         <div class="banner-carousel" data-carousel>
@@ -357,42 +418,22 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
         <div class="banner-carousel" data-carousel>
           <div class="carousel-track">
             <div class="carousel-slide">
-              <img src="img/banner/gold_hit.png" alt="宝くじバナーサンプル">
-              <span class="sub">宝くじバナーサンプル</span>
-            </div>
-            <div class="carousel-slide">
-              <img src="img/banner/christmas.png" alt="クリスマス商品サンプル">
-              <span class="sub">クリスマス商品サンプル</span>
-            </div>
-            <div class="carousel-slide">
-              <img src="img/banner/chojo.png" alt="新商品リリース告知バナーサンプル">
-              <span class="sub">競艇予想新商品リリース告知</span>
+              <img src="img/banner/chojo.png" alt="新商品リリース告知バナー制作サンプル">
+              <span class="sub">例：新商品リリース告知</span>
             </div>
           </div>
           <div class="carousel-dots"></div>
         </div>
       </div>
 
-      <div class="cell exp-years">
-        <span class="stat-num">14年</span>
-        <span class="sub">経験年数</span>
-      </div>
-
-      <div class="cell strength">
-        <i class="ti ti-star" aria-hidden="true"></i>
-        <span class="label">得意分野</span>
-        <span class="sub">Figma設計</span>
-        <span class="sub">JSやCSSでのアニメーション実装</span>
-      </div>
-
     </div>
   </section>
 
-  <section class="works-wrap">
+  <section id="works" class="works-wrap">
     <div class="section-label">Works — 実務実績（背景を透過するグラスカード）</div>
 
     <div class="work-card">
-      <div class="work-thumb"><img src="img/thumb/kinyu.svg" alt="某金融コーポレートサイト" class="ti ti-photo" aria-hidden="true"></i></div>
+      <div class="work-thumb"><img class="work-icon" src="img/thumb/kinyu.svg" alt="某金融コーポレートサイト" class="ti ti-photo" aria-hidden="true"/></div>
       <div class="work-body">
         <div class="work-title">某金融コーポレートサイト リニューアル</div>
         <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">企業サイトのリニューアル案件。旧CMSのサポート終了に伴い、新規CMS（ヘッドレスCMS+SSG）への移行にあたってのデータ整備を担当。</div>
@@ -406,14 +447,33 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     </div>
 
     <div class="work-card">
-      <div class="work-thumb"><i class="ti ti-photo" aria-hidden="true"></i></div>
+      <div class="work-thumb"><img class="work-icon" src="img/thumb/horse.svg" alt="某金融コーポレートサイト" class="ti ti-photo" aria-hidden="true"/></div>
       <div class="work-body">
-        <div class="work-title">ABCコーポレートサイト リニューアル</div>
-        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">企業サイトのリニューアル案件。旧CMSのサポート終了に伴い、新規CMS（ヘッドレスCMS+SSG）への移行にあたってのデータ整備を担当。</div>
+        <div class="work-title">競馬予想サイトの作成</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          競馬予想サイトの開発案件。ユーザーのニーズに応じたUI/UX設計と、前後の画面遷移を考慮したコーディングを担当。</div>
         <div class="tags">
+          <span class="tag">デザイン</span>
           <span class="tag">コーディング／UI設計</span>
-          <span class="tag">Directus</span>
-          <span class="tag">JSX</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Figma</span>
+        </div>
+        <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb"><img class="work-image" src="img/thumb/web_gapporisushi.png" alt="某金融コーポレートサイト" class="ti ti-photo" aria-hidden="true"/></div>
+      <div class="work-body">
+        <div class="work-title">ゲームLPの作成</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          競馬予想サイトの開発案件。ユーザーのニーズに応じたUI/UX設計と、前後の画面遷移を考慮したコーディングを担当。</div>
+        <div class="tags">
+          <span class="tag">デザイン</span>
+          <span class="tag">コーディング／UI設計</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Figma</span>
         </div>
         <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
       </div>
@@ -421,11 +481,25 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
 
   </section>
 
-  <section class="sample-wrap">
+  <section class="figma-wrap">
+    <div class="section-label">Figma gallery — デザイン制作事例</div>
+    <div class="figma-grid">
+      <div class="figma-card">
+        <div class="figma-thumb"><img src="img/thumb/figma_tokka.png" alt="Figma" class="ti ti-brand-figma" aria-hidden="true" /></div>
+        <div class="figma-name">競馬予想サイト「トッカ」ログイン前/後各画面</div>
+        <div class="figma-link"><a target="_blank" href="https://www.figma.com/design/1lncGE2rWrhtY1x13kXJan/%E7%AB%B6%E9%A6%AC%E4%BA%88%E6%83%B3%E3%82%B5%E3%82%A4%E3%83%88%E3%83%BB%E3%83%88%E3%83%83%E3%82%AB?node-id=0-1&t=HTi2Sf2aAUcdWa1L-1"><i class="ti ti-external-link" aria-hidden="true">Figma link</i></a></div>
+      </div>
+      <div class="figma-card">
+        <div class="figma-thumb"><img src="img/thumb/figma_umasugu.png" alt="Figma" class="ti ti-brand-figma" aria-hidden="true" /></div>
+        <div class="figma-name">競馬予想サイト LPデザイン</div>
+        <div class="figma-link"><a target="_blank" href="https://www.figma.com/design/yi0VHjvIQ1dsGd8TJvK5PD/%E3%81%86%E3%81%BE%E3%82%B9%E3%82%B0%EF%BC%81?node-id=0-1&t=485HZH7O6jPzfZcS-1"><i class="ti ti-external-link" aria-hidden="true">Figma link</i></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sample" class="sample-wrap">
     <div class="section-label">サンプル制作 <span class="badge">実在しないデモ</span></div>
     <div class="sample-grid">
-      <!-- FIX: leftover placeholder classes (class="ti ti-photo" aria-hidden) and a stray
-           </i> tag were left on the real <img> tags, and no img sizing rule existed. -->
       <div class="sample-card">
         <div class="sample-thumb"><img src="img/thumb_wp_radio.png" alt="架空ラジオ局サイト"></div>
         <div class="sample-name">架空ラジオ局サイト</div>
@@ -437,21 +511,8 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     </div>
   </section>
 
-  <section class="figma-wrap">
-    <div class="section-label">Figma gallery — デザイン制作事例</div>
-    <div class="figma-grid">
-      <div class="figma-card">
-        <div class="figma-thumb"><img src="img/thumb/figma_tokka.png" alt="Figma" class="ti ti-brand-figma" aria-hidden="true" /></div>
-        <div class="figma-name">例：ECサイト UIデザイン案</div>
-      </div>
-      <div class="figma-card">
-        <div class="figma-thumb"><img src="img/thumb/figma_umasugu.png" alt="Figma" class="ti ti-brand-figma" aria-hidden="true" /></div>
-        <div class="figma-name">例：ECサイト UIデザイン案</div>
-      </div>
-    </div>
-  </section>
 
-  <footer>
+  <footer id="contact">
     <div class="contact-lines">
       <div class="contact-title">Contact</div>
       <div class="contact-field">お名前</div>
@@ -466,6 +527,15 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     </div>
   </footer>
 
+</div>
+
+<!-- Lightbox modal: shared by both banner carousels -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
 </div>
 
 <script>
@@ -488,8 +558,8 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     if (window.innerWidth > 768){ mobileNavMenu.classList.remove('open'); }
   });
 
-  // FIX: new — turns each [data-carousel] block into a working slider with dots.
-  // Cells with only one slide (e.g. 静止画バナー) simply render without dots/autoplay.
+  // Carousel: turns each [data-carousel] block into a slider with dots.
+  // Single-slide carousels (静止画バナー) just skip the dots/autoplay.
   document.querySelectorAll('[data-carousel]').forEach(function(carousel){
     var track = carousel.querySelector('.carousel-track');
     var slides = Array.prototype.slice.call(track.children);
@@ -497,15 +567,15 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     var index = 0;
     var timer;
 
-    if (slides.length <= 1) return; // nothing to slide
-
-    slides.forEach(function(_, i){
-      var dot = document.createElement('button');
-      if (i === 0) dot.classList.add('active');
-      dot.setAttribute('aria-label', 'スライド ' + (i + 1));
-      dot.addEventListener('click', function(){ goTo(i); resetTimer(); });
-      dotsWrap.appendChild(dot);
-    });
+    if (slides.length > 1){
+      slides.forEach(function(_, i){
+        var dot = document.createElement('button');
+        if (i === 0) dot.classList.add('active');
+        dot.setAttribute('aria-label', 'スライド ' + (i + 1));
+        dot.addEventListener('click', function(){ goTo(i); resetTimer(); });
+        dotsWrap.appendChild(dot);
+      });
+    }
 
     function goTo(i){
       index = (i + slides.length) % slides.length;
@@ -516,11 +586,45 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     }
 
     function resetTimer(){
+      if (slides.length <= 1) return;
       clearInterval(timer);
       timer = setInterval(function(){ goTo(index + 1); }, 3500);
     }
 
     resetTimer();
+  });
+
+  // Lightbox: click/tap any banner image to view it large with its caption.
+  var lightboxOverlay = document.getElementById('lightboxOverlay');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxCaption = document.getElementById('lightboxCaption');
+  var lightboxClose = document.getElementById('lightboxClose');
+
+  function openLightbox(src, caption){
+    lightboxImg.src = src;
+    lightboxImg.alt = caption;
+    lightboxCaption.textContent = caption;
+    lightboxOverlay.classList.add('open');
+  }
+  function closeLightbox(){
+    lightboxOverlay.classList.remove('open');
+    lightboxImg.src = '';
+  }
+
+  document.querySelectorAll('.cell.gif-banner .carousel-slide img, .cell.static-banner .carousel-slide img')
+    .forEach(function(img){
+      img.addEventListener('click', function(){
+        var captionEl = img.closest('.carousel-slide').querySelector('.sub');
+        openLightbox(img.src, captionEl ? captionEl.textContent : img.alt);
+      });
+    });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxOverlay.addEventListener('click', function(e){
+    if (e.target === lightboxOverlay) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLightbox();
   });
 </script>
 
