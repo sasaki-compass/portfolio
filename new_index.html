@@ -169,9 +169,14 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 .skills-list{ margin:6px 0 0; padding-left:18px; font-size:11px; color:var(--text-secondary); text-align:left; width:100%; }
 .skills-list li{ margin-bottom:3px; }
 
+.contact-field,
+.contact-form{ 
+  width:100%;
+
+}
 .contact-field{
   border:1px solid var(--border); border-radius:var(--radius);
-  padding:6px 10px; font-size:11px; color:var(--text-muted); width:100%;
+  padding:6px 10px; font-size:11px; color:var(--text-muted); 
 }
 .contact-field.short{ width:60%; }
 
@@ -424,8 +429,10 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
 .gotop{
   position:fixed; bottom:20px; right:20px; z-index:999;
   background:var(--surface-1); color:var(--accent);
-  border-radius:var(--radius); padding:6px 12px; font-size:11px;
+  border-radius:var(--radius); padding:6px 12px; 
   text-decoration:none;
+  /*font-size:11px;*/
+  font-size:var(--font-primary);
 }
 .gotop a{
   text-decoration:none; color:inherit;
@@ -805,7 +812,7 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
       <div class="contact-title">Contact</div>
       <input class="contact-field" type="text" name="name" placeholder="お名前" required>
       <input class="contact-field" type="email" name="email" placeholder="メールアドレス" required>
-      <textarea class="contact-field short" name="message" placeholder="ご相談内容" rows="4" required></textarea>
+      <textarea class="contact-field" name="message" placeholder="ご相談内容" rows="4" required></textarea>
       <button type="submit" class="contact-submit">
         <i class="ti ti-send" aria-hidden="true"></i>送信する
       </button>
