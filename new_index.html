@@ -116,8 +116,15 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 .fv .role{ font-size:13px; color:var(--text-secondary); }
 .fv .scroll{ margin-top:10px; font-size:10px; color:var(--text-muted); display:flex; align-items:center; gap:4px; }
 
-.bento-wrap{ 
+.bento-wrap, 
+.sample-wrap, 
+.motion-wrap{ 
   background:var(--transparent-1);
+}
+.bento-wrap .section-label, 
+  .sample-wrap .section-label, 
+  .motion-wrap .section-label,
+  footer .section-label{ 
   color:var(--text-primary);
 }
 /* ---------- Bento ---------- */
@@ -253,7 +260,9 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
   width:100%; height:100px; border:1px dashed var(--border-strong); border-radius:var(--radius);
   display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:18px;
   overflow:hidden;
-  background:rgba(255,255,255,0.25);
+  /*
+  background:rgba(255,255,255,0.25);*/
+  background:rgba(255,255,255,1);
 }
 .work-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 .work-thumb .work-icon{
@@ -278,6 +287,10 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 .sample-card{
   border:1px dashed var(--border-strong); border-radius:12px; padding:10px;
   display:flex; flex-direction:column; gap:8px;
+    background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(31, 31, 35, 0.10);
 }
 .sample-thumb{
   width:100%; 
@@ -289,6 +302,25 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 }
 .sample-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 .sample-name{ font-size:11px; color:var(--text-primary); }
+.sample-link {
+  margin-top: min(2vw, 8px);
+}
+.sample-link a{
+  display:inline-block;
+  width:fit-content;
+  padding:min(.5vw,2px) min(2vw,8px);
+  text-decoration:none; 
+  background:var(--surface-1);
+  color:var(--accent); 
+  display:flex; 
+  align-items:center; 
+  gap:4px;
+}
+.sample-link a:hover{
+  background:var(--accent);
+  color:var(--surface-1);
+
+}
 
 /* ---------- Figma gallery ---------- */
 .figma-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); 
@@ -298,6 +330,10 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 .figma-card{
   border:1px solid var(--border-strong); border-radius:12px; padding:8px;
   display:flex; flex-direction:column; gap:6px;
+      background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(31, 31, 35, 0.10);
 }
 .figma-thumb{
   width:100%; height:56px; border:1px dashed var(--border-strong); border-radius:var(--radius);
@@ -345,11 +381,33 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; background:var(--surface-1); }
 .contact-lines{ display:flex; flex-direction:column; gap:6px; }
 .contact-title{ font-size:12px; }
+.pdf-buttons{
+  display:flex; gap:10px; flex-wrap:wrap;
+}
 .pdf-btn{
   border:1px solid var(--border-strong); border-radius:var(--radius); padding:8px 14px;
   font-size:11px; color:var(--text-secondary); display:flex; align-items:center; gap:6px; width:fit-content;
+  background:var(--accent); color:var(--surface-0);
+}
+.pdf-btn a{
+  text-decoration:none; color:inherit;
+}
+.pdf-btn:hover{
+  background:var(--surface-0); color:var(--accent);
 }
 .sns{ display:flex; gap:14px; color:var(--text-muted); font-size:16px; }
+.gotop{
+  position:fixed; bottom:20px; right:20px; z-index:999;
+  background:var(--surface-1); color:var(--accent);
+  border-radius:var(--radius); padding:6px 12px; font-size:11px;
+  text-decoration:none;
+}
+.gotop a{
+  text-decoration:none; color:inherit;
+}
+.gotop:hover{
+  background:var(--accent); color:var(--surface-0);
+}
 
 /* =========================================================
    BREAKPOINT: mobile-first base above, desktop overrides below
@@ -359,6 +417,13 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
   .mode-desktop{ display:inline !important; }
 
   nav.desktop-nav{ display:flex; }
+  nav.desktop-nav a{ 
+    text-decoration:none; color:var(--text-secondary); font-size:12px; display:flex; align-items:center; gap:4px;
+    color:var(--surface-0)
+  }
+  nav.desktop-nav a:hover{ 
+    color:var(--accent);
+  }
   .resume-btn{ display:flex; align-items:center; }
   .hamburger{ display:none; }
   .mobile-nav-menu{ display:none !important; }
@@ -405,13 +470,15 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
 
 <div class="page">
 
-  <header>
+  <header id="top">
     <div class="logo">SASAKI WEB WORK / Hiroshi</div>
     <nav class="desktop-nav">
-      <span>About</span><span>Works</span><span>Contact</span>
+      <a class="desktop-nav-link" href="#about"><span>About</span></a>
+      <a class="desktop-nav-link" href="#works"><span>Works</span></a>
+      <a class="desktop-nav-link" href="#contact"><span>Contact</span></a>
     </nav>
     <i class="ti ti-menu-2 hamburger" id="hamburgerBtn" aria-hidden="true"></i>
-    <div class="resume-btn"><i class="ti ti-download" style="font-size:13px; margin-right:6px;" aria-hidden="true"></i>Resume DL</div>
+    <!--div class="resume-btn"><i class="ti ti-download" style="font-size:13px; margin-right:6px;" aria-hidden="true"></i>Resume DL</div-->
   </header>
 
   <nav class="mobile-nav-menu" id="mobileNavMenu">
@@ -549,7 +616,22 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
         <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
       </div>
     </div>
-
+    
+    <div class="work-card">
+      <div class="work-thumb"><img src="img/thumb/blacksmith.svg" alt="競馬予想情報提供サイト" class=" work-icon ti ti-photo" aria-hidden="true"></div>
+      <div class="work-body">
+        <div class="work-title">金属加工サービス サイト更新</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          オンライン金属加工サービスのサイト更新案件。既存のデザインに合わせて新規ページの制作を担当。
+        </div>
+        <div class="tags">
+          <span class="tag">コーディング／UI設計</span>
+          <span class="tag">Directus</span>
+          <span class="tag">JSX</span>
+        </div>
+        <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
+      </div>
+    </div>
     <div class="work-card">
       <div class="work-thumb"><img src="img/thumb/web_gapporisushi.png" alt="アーケードゲームLPサイト" class="ti ti-photo" aria-hidden="true"></div>
       <div class="work-body">
@@ -561,7 +643,22 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
           <span class="tag">HTML/CSS</span>
           <span class="tag">JavaScript</span>
         </div>
-        <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
+        <div class="sample-link"><a target="_blank" href="https://enh-gapporisushi.com/" ><i class="ti ti-external-link" aria-hidden="true">Site link</i></a></div>
+      </div>
+    </div>
+    
+    <div class="work-card">
+      <div class="work-thumb"><img src="img/thumb/web_rentalfarm.png" alt="アーケードゲームLPサイト" class="ti ti-photo" aria-hidden="true"></div>
+      <div class="work-body">
+        <div class="work-title">レンタルファーム サイト作成</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          アーケードゲームの新規作成。デザイン提案からコーディング、納品やマニュアル作成までを担当。CSSアニメーションなども担当</div>
+        <div class="tags">
+          <span class="tag">デザイン／コーディング</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+        <div class="sample-link"><a target="_blank" href="https://tuku-shinbo.com/" ><i class="ti ti-external-link" aria-hidden="true">Site link</i></a></div>
       </div>
     </div>
 
@@ -652,7 +749,19 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
       <div class="contact-field">メールアドレス</div>
       <div class="contact-field short">ご相談内容</div>
     </div>
-    <div class="pdf-btn"><i class="ti ti-download" aria-hidden="true"></i>スキルシート PDF</div>
+    <div class="pdf-buttons">
+      <div class="pdf-btn">
+        <a href="https://docs.google.com/spreadsheets/d/1-EmOFuE6qqB5T80GRx4GI83lKEjWEOiC/edit?usp=sharing&ouid=118431319089068162907&rtpof=true&sd=true" target="_blank">
+          <i class="ti ti-download" aria-hidden="true">WEBスキルシート PDF</i>
+        </a>
+      </div>
+      <div class="pdf-btn">
+        <a href="https://drive.google.com/file/d/1UvkDJTtZkJmZ4bKYUtvX_UDD0aHUxMlI/view?usp=sharing" target="_blank">
+          <i class="ti ti-download" aria-hidden="true">ゲームスキルシート PDF</i>
+        </a>
+        </a>
+      </div>
+    </div>
     <div class="sns">
       <i class="ti ti-brand-github" aria-hidden="true"></i>
       <i class="ti ti-brand-x" aria-hidden="true"></i>
@@ -680,6 +789,10 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
     </div>
     <div class="lightbox-caption" id="motionLightboxCaption"></div>
   </div>
+</div>
+
+<div class="gotop">
+  <a href="#top">Go Top</a>
 </div>
 
 <script>
