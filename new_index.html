@@ -175,7 +175,12 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 }
 .contact-field.short{ width:60%; }
 
-.contact-form{ display:flex; flex-direction:column; gap:6px; }
+.contact-form{ 
+  display:flex; 
+  flex-direction:column; 
+  gap:6px; 
+  width:100%;
+}
 .contact-form textarea.contact-field{ resize:vertical; font-family:inherit; }
 .contact-submit{
   border:1px solid var(--border-strong); border-radius:var(--radius);
@@ -473,7 +478,11 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
   .figma-grid{ grid-template-columns: repeat(4, 1fr); }
   .motion-grid{ grid-template-columns: repeat(3, 1fr); }
 
-  footer{ flex-direction:row; justify-content:space-between; align-items:flex-start; }
+  footer{ 
+     flex-direction:row;
+     justify-content:space-between; 
+     align-items:flex-start;
+  }
 }
 </style>
 </head>
@@ -581,7 +590,19 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
           <div class="carousel-track">
             <div class="carousel-slide">
               <img src="img/banner/chojo.png" alt="新商品リリース告知バナー制作サンプル">
-              <span class="sub">例：新商品リリース告知</span>
+              <span class="sub">新商品リリース告知</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="img/banner/christmas.png" alt="クリスマスキャンペーンバナー">
+              <span class="sub">クリスマスキャンペーン</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="img/banner/keiba_banner_01.png" alt="競馬キャンペーンバナー">
+              <span class="sub">競馬キャンペーン</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="img/banner/gold_hit.png" alt="宝くじキャンペーンバナー">
+              <span class="sub">宝くじキャンペーン</span>
             </div>
           </div>
           <div class="carousel-dots"></div>
