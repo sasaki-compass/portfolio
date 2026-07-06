@@ -22,7 +22,7 @@ overlays.forEach(function(overlay) {
   const animation = lottie.loadAnimation({
     container: overlay,
     renderer: 'svg',
-    loop: false, // 1回だけ再生しきる
+    loop: true, // 1回だけ再生しきる
     autoplay: false, // 最初は止めておく
     path: jsonPath
   });
