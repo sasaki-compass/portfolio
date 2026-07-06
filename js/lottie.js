@@ -8,18 +8,33 @@ const loadingAnimation = lottie.loadAnimation({
   path: 'assets/bounce.json'                            // .jsonファイルへのパス
 });
 */
+// JavaScript (main.js)
 
-const buttonEl = document.getElementById('lottie-button');
+// ページ上のすべての '.lottie-overlay' クラスを持つ要素を取得
+const overlays = document.querySelectorAll('.lottie-overlay');
 
-const buttonAnimation = lottie.loadAnimation({
-  container: buttonEl,
-  renderer: 'svg',
-  loop: false,       // 1回だけ再生させたいのでfalse
-  autoplay: false,   // 最初は止めておくのでfalse
-  path: 'assets/bounce.json'
-});
+// 取得した要素一つ一つに対して、ループ処理を行う
+overlays.forEach(function(overlay) {
+  // data-json属性からファイルパスを取得
+  const jsonPath = overlay.getAttribute('data-json');
 
-// ボタンがクリックされた時の処理
-buttonEl.addEventListener('click', () => {
-  buttonAnimation.goToAndPlay(0); // 最初のフレーム（0）に戻して再生する
+  // この要素に対してLottieを読み込む（autoplayはfalse）
+  const animation = lottie.loadAnimation({
+    container: overlay,
+    renderer: 'svg',
+    loop: false, // 1回だけ再生しきる
+    autoplay: false, // 最初は止めておく
+    path: jsonPath
+  });
+
+  // このアニメーションを管理する親要素（a.lottie-container）を取得
+  const parent = overlay.closest('.lottie-container');
+
+  // 親要素にマウスが乗ったとき（mouseenter）
+  parent.addEventListener('mouseenter', () => {
+    animation.goToAndPlay(0); // 最初（0フレーム）に戻して再生開始
+  });
+
+  // マウスが外れた時（mouseleave）は、CSSで非表示になるだけ。
+  // アニメーションはそのまま最後まで再生させきります（パターン2）
 });

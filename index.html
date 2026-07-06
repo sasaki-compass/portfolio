@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio Site — Wireframe (Responsive)</title>
+<title>Sasaki Webwork - Portfolio Site</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
 <style>
@@ -504,6 +504,35 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
      align-items:flex-start;
   }
 }
+
+/* CSS (style.css) */
+
+/* 親要素（画像リンク） */
+.lottie-container {
+  display: block; /* <a>タグをブロック要素に */
+  position: relative; /* 子（Lottie）の位置基準になる */
+  overflow: hidden; /* Lottieがはみ出した場合を隠す */
+}
+
+/* 子要素（Lottieの箱） */
+.lottie-overlay {
+  position: absolute; /* 親に対して絶対位置 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 親と同じ幅 */
+  height: 100%; /* 親と同じ高さ */
+  
+  opacity: 0; /* 通常は透明（見えない） */
+  transition: opacity 0.3s ease; /* ふわっと表示させる */
+  pointer-events: none; /* Lottie自体はマウス入力を無視し、下の<a>タグにクリックを通す */
+  
+  z-index: 10; /* 画像の上に重ねる */
+}
+
+/* 【重要】親にマウスが乗ったとき、Lottieを表示 */
+.lottie-container:hover .lottie-overlay {
+  opacity: 1; /* 不透明度を1に */
+}
 </style>
 </head>
 <body>
@@ -537,10 +566,10 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
   </nav>
 
   <section class="fv">
-    <div class="eyebrow">FV — first view</div>
     <div class="name">SASAKI WEBWORK</div>
     <div class="role">Web Coder / Frontend Engineer / Web Designer</div>
-    <div class="scroll"><i class="ti ti-chevron-down" aria-hidden="true"></i>scroll</div>
+    <div id="lottie-allow" style="width: 100px; max-width: 200px; margin: 0 auto;"></div>
+    
   </section>
 
   <section class="bento-wrap">
@@ -752,7 +781,15 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
       </div>
     </div>
   </section>
+<a href="#" class="works-card lottie-container">
+  <img src="img/thumb/figma_tokka.png" alt="実績1" width="300px"> 
+  <div class="lottie-overlay" data-json="assets/animation1.json"></div>
+</a>
 
+<a href="#" class="works-card lottie-container">
+  <img src="img/thumb/figma_tokka.png" alt="実績1" width="300px">>
+  <div class="lottie-overlay" data-json="assets/animation2.json"></div>
+</a>
   <section class="figma-wrap">
     <div class="section-label">Figma gallery — デザイン制作事例</div>
     <div class="figma-grid">
@@ -780,15 +817,14 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
        with real .json exports from After Effects + Bodymovin when ready. -->
   <section class="motion-wrap">
     <div class="section-label">UI Motion <span class="badge">Lottie (.json) 対応</span></div>
+    <div id="lottie-loading" style="width: 100%; max-width: 300px; margin: 0 auto;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="js/lottie.js"></script>
     <div class="motion-grid">
-
-      <div class="motion-tile" data-lottie="lottie/button_tap.json" data-caption="ボタン押下時のマイクロインタラクション">
-        <div class="phone-frame">
-          <div class="lottie-target"></div>
+        <div class="motion-tile" data-lottie="lottie/button_tap.json" data-caption="ボタン押下時のマイクロインタラクション">
+            <div class="phone-frame">
+                <div class="lottie-target"></div>
           <div class="motion-fallback">
-            <div id="lottie-loading" style="width: 100%; max-width: 300px; margin: 0 auto;"></div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-            <script src="js/lottie.js"></script>
             <i class="ti ti-hand-click" aria-hidden="true"></i>
             <span>準備中</span>
           </div>
@@ -880,10 +916,14 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
   </div>
 </div>
 
+
 <div class="gotop">
   <a href="#top">Go Top</a>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="js/lottie.js"></script>
+    <script src="js/lottie_2.js"></script>
 <script>
   function updateModeFlag(){
     var isDesktop = window.innerWidth > 768;
