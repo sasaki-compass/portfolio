@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio Site — Wireframe (Responsive)</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
 <style>
 :root{
-  --bg:#ffffff;
+  --bg:#f5f5f7;
   --surface-0:#ffffff;
   --surface-1:#f7f7f8;
   --surface-2:#eeeef0;
@@ -17,8 +18,15 @@
   --text-secondary:#5b5b63;
   --text-muted:#9a9aa2;
   --accent:#6b6bf2;
+  /*
   --radius:8px;
   --radius-lg:14px;
+  */
+  --radius:min(1vw, 8px);
+  --radius-lg:min(2vw,14px);
+  --font-primary: min(3vw, 24px);
+  --font-secondary: min(2vw, 16px);
+  --transparent-1: rgba(255,255,255,0.32);
 }
 *{box-sizing:border-box;}
 body{
@@ -27,8 +35,21 @@ body{
   font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",-apple-system,BlinkMacSystemFont,sans-serif;
   color:var(--text-primary);
   padding:24px 12px 60px;
+  font-size:var(--font-secondary);
+}
+
+.bg-scene{
+  position:fixed; inset:0; z-index:-1;
+  /*
+  background:
+    radial-gradient(560px circle at 12% 18%, rgba(107,107,242,0.32), transparent 62%),
+    radial-gradient(480px circle at 88% 12%, rgba(255,159,67,0.26), transparent 60%),
+    radial-gradient(620px circle at 50% 92%, rgba(72,219,193,0.26), transparent 62%),
+    var(--bg);
+    */
   background:url(img/bg.jpeg);
-}/*
+}
+
 .mode-flag{
   max-width:1040px;
   margin:0 auto 14px;
@@ -38,16 +59,21 @@ body{
   border:1px dashed var(--border-strong);
   border-radius:var(--radius);
   padding:6px 10px;
+  background:var(--surface-0);
 }
-.mode-flag b{color:var(--text-primary);}*/
+.mode-flag b{color:var(--text-primary);}
 .page{
   max-width:1040px;
   margin:0 auto;
   border:1px solid var(--border-strong);
   border-radius:16px;
   overflow:hidden;
-  background:linear-gradient(180deg, var(--surface-1) 0%, var(--surface-2) 42%, var(--surface-1) 100%);
   position:relative;
+  /*
+  background:transparent;
+  */
+  background:#ffffff55;
+  backdrop-filter: blur(5px);
 }
 section, header, footer{ position:relative; z-index:1; }
 
@@ -55,14 +81,11 @@ section, header, footer{ position:relative; z-index:1; }
 header{
   display:flex; align-items:center; justify-content:space-between;
   padding:0 20px; height:56px; border-bottom:1px solid var(--border);
+  /*background:var(--surface-0);*/
+  color:var(--surface-0);
 }
 .logo{ font-size:13px; font-weight:600; }
 nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-secondary); }
-nav.desktop-nav a{
-  text-decoration:none; color:var(--text-secondary); 
-  background:var(--surface-0); padding:6px 12px; border-radius:var(--radius);
-  border:1px solid var(--border-strong);
-}
 .resume-btn{
   display:none;
   border:1px solid var(--border-strong); border-radius:var(--radius);
@@ -73,7 +96,7 @@ nav.desktop-nav a{
 .mobile-nav-menu{
   display:none; flex-direction:column;
   border-bottom:1px solid var(--border);
-  background:var(--surface-0);
+  /*background:var(--surface-0);*/
 }
 .mobile-nav-menu.open{ display:flex; }
 .mobile-nav-menu a{
@@ -93,10 +116,29 @@ nav.desktop-nav a{
 .fv .role{ font-size:13px; color:var(--text-secondary); }
 .fv .scroll{ margin-top:10px; font-size:10px; color:var(--text-muted); display:flex; align-items:center; gap:4px; }
 
+.bento-wrap{ 
+  background:var(--transparent-1);
+  color:var(--text-primary);
+}
 /* ---------- Bento ---------- */
-.bento-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); }
-.section-label{ font-size:11px; color:var(--text-muted); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
-.badge{ font-size:9px; border:1px solid var(--border-strong); border-radius:var(--radius); padding:1px 6px; color:var(--text-secondary); }
+.bento-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); 
+  /*background:var(--surface-1); */
+}
+.section-label{ 
+  /*
+  font-size:11px; 
+  color:var(--text-muted); 
+  */
+  color:var(--surface-0);
+  font-size:var(--font-primary); 
+  margin-bottom:10px; display:flex; align-items:center; gap:6px; 
+}
+
+.badge{ font-size:9px; border:1px solid var(--border-strong); border-radius:var(--radius); padding:1px 6px; 
+/*  color:var(--text-secondary); */
+  background:var(--accent); 
+  color:var(--surface-0); 
+}
 
 .bento{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
 .cell{
@@ -149,23 +191,13 @@ nav.desktop-nav a{
   min-width:100%;
   display:flex;
   flex-direction:column;
-  min-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 4px;
 }
-/* image fills whatever height the carousel/cell has — this is what makes the
-   banner grow taller automatically when the desktop grid row is made taller */
 .carousel-slide img{
   width:100%;
   flex:1;
   object-fit:cover;
   display:block;
   cursor:zoom-in;
-  max-height:100%;
 }
 .carousel-slide .sub{ font-size:9px; color:var(--text-muted); text-align:center; padding:4px 2px; }
 .carousel-dots{
@@ -177,7 +209,7 @@ nav.desktop-nav a{
 }
 .carousel-dots button.active{ background:var(--accent); }
 
-/* ---------- Lightbox (click/tap a banner image to view large + caption) ---------- */
+/* ---------- Lightbox (shared visual style; used for both banner images and Lottie motion) ---------- */
 .lightbox-overlay{
   display:none;
   position:fixed; inset:0;
@@ -205,29 +237,43 @@ nav.desktop-nav a{
   font-size:30px; line-height:1; cursor:pointer; padding:4px 8px;
 }
 
-/* ---------- Works ---------- */
-.works-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:12px; }
+/* ---------- Works — glassmorphism zone ---------- */
+.works-wrap{ padding:28px 16px; display:flex; flex-direction:column; gap:16px; background:transparent; }
 .work-card{
-  border:1px solid var(--border-strong); border-radius:12px; padding:14px;
+  border:1px solid rgba(255,255,255,0.55);
+  border-radius:16px;
+  padding:16px;
   display:flex; flex-direction:column; gap:8px;
-  background:rgba(238,238,240,0.55); backdrop-filter:blur(1px);
+  background:rgba(255,255,255,0.32);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(31,31,35,0.10);
 }
 .work-thumb{
   width:100%; height:100px; border:1px dashed var(--border-strong); border-radius:var(--radius);
   display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:18px;
   overflow:hidden;
-  background: var(--bg);
+  background:rgba(255,255,255,0.25);
 }
-.work-thumb .work-icon{ width:50%; height:100%; /*object-fit:cover;*/ display:block; }
-.work-thumb .work-image{ width:100%; height:auto; /*object-fit:cover;*/ display:block; }
+.work-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.work-thumb .work-icon{
+  width:auto; 
+  height:100%; 
+  object-fit:contain; display:block;
+}
 .work-title{ font-size:13px; font-weight:500; }
 .tags{ display:flex; gap:6px; flex-wrap:wrap; }
-.tag{ font-size:10px; color:var(--text-secondary); border:1px solid var(--border); border-radius:var(--radius); padding:2px 8px; }
+.tag{
+  font-size:10px; color:var(--text-secondary);
+  border:1px solid rgba(255,255,255,0.6); background:rgba(255,255,255,0.35);
+  border-radius:var(--radius); padding:2px 8px;
+}
 .figma-link{ font-size:11px; color:var(--accent); display:flex; align-items:center; gap:4px; }
-.figma-link a{ color:var(--accent); text-decoration:none; }
 
 /* ---------- Sample works ---------- */
-.sample-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); }
+.sample-wrap{ padding:18px 16px; border-bottom:1px solid var(--border);
+  /*background:var(--surface-1); */
+}
 .sample-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
 .sample-card{
   border:1px dashed var(--border-strong); border-radius:12px; padding:10px;
@@ -235,8 +281,8 @@ nav.desktop-nav a{
 }
 .sample-thumb{
   width:100%; 
-  /*height:80px;*/ 
-  height:auto;
+  /*height:80px; */
+  height:max(10vw,300px); 
   border:1px dashed var(--border-strong); border-radius:var(--radius);
   display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:16px;
   overflow:hidden;
@@ -245,7 +291,9 @@ nav.desktop-nav a{
 .sample-name{ font-size:11px; color:var(--text-primary); }
 
 /* ---------- Figma gallery ---------- */
-.figma-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); }
+.figma-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); 
+/*  background:var(--surface-1); */
+}
 .figma-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
 .figma-card{
   border:1px solid var(--border-strong); border-radius:12px; padding:8px;
@@ -259,8 +307,42 @@ nav.desktop-nav a{
 .figma-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 .figma-name{ font-size:10px; color:var(--text-primary); }
 
+/* ---------- UI Motion (Lottie) — NEW ----------
+   Placeholder scaffold: data-lottie paths point at files that don't exist
+   yet. Each tile shows a fallback icon/label until a real .json is dropped
+   in at that path — nothing looks broken in the meantime. */
+.motion-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); 
+  /*background:var(--surface-1); */
+}
+.motion-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.motion-tile{
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  cursor:zoom-in;
+}
+.phone-frame{
+  width:100%; aspect-ratio:9/16; max-height:170px;
+  border:2px solid var(--border-strong); border-radius:16px;
+  background:var(--surface-2);
+  overflow:hidden; position:relative;
+}
+.phone-frame .lottie-target{
+  position:absolute; inset:0;
+}
+.phone-frame .motion-fallback{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  color:var(--text-muted);
+}
+.phone-frame .motion-fallback i{ font-size:20px; }
+.phone-frame .motion-fallback span{ font-size:9px; }
+.motion-name{ font-size:10px; color:var(--text-primary); text-align:center; }
+.phone-frame-lg{
+  width:220px; max-height:none; aspect-ratio:9/16;
+  margin:0 auto;
+}
+
 /* ---------- Footer ---------- */
-footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
+footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; background:var(--surface-1); }
 .contact-lines{ display:flex; flex-direction:column; gap:6px; }
 .contact-title{ font-size:12px; }
 .pdf-btn{
@@ -285,9 +367,6 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
   .fv .name{ font-size:36px; }
   .fv .role{ font-size:15px; }
 
-  /* NOTE: 4th row added and made much taller (240px) specifically for the
-     two banner cards, and each banner now spans 2 columns (= half the
-     bento's total width) instead of 1. */
   .bento{
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 84px 84px 64px 240px;
@@ -301,23 +380,21 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
   .cell.gif-banner{ grid-column:1 / span 2; grid-row:4; }
   .cell.static-banner{ grid-column:3 / span 2; grid-row:4; }
 
-  .carousel-slide img{
-    max-height:150px;
-  }
-
   .work-card{ flex-direction:row; gap:18px; }
   .work-thumb{ width:200px; height:120px; flex-shrink:0; }
   .work-body{ flex:1; display:flex; flex-direction:column; gap:8px; justify-content:center; }
-  .work-thumb .work-icon{ height:auto; }
 
   .sample-grid{ grid-template-columns: repeat(3, 1fr); }
   .figma-grid{ grid-template-columns: repeat(4, 1fr); }
+  .motion-grid{ grid-template-columns: repeat(3, 1fr); }
 
   footer{ flex-direction:row; justify-content:space-between; align-items:flex-start; }
 }
 </style>
 </head>
 <body>
+
+<div class="bg-scene" aria-hidden="true"></div>
 
 <!--div class="mode-flag">
   現在の表示モード：
@@ -331,12 +408,10 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
   <header>
     <div class="logo">SASAKI WEB WORK / Hiroshi</div>
     <nav class="desktop-nav">
-      <a href="#about"><span>About</span></a>
-      <a href="#works"><span>Works</span></a>
-      <a href="#contact"><span>Contact</span></a>
+      <span>About</span><span>Works</span><span>Contact</span>
     </nav>
     <i class="ti ti-menu-2 hamburger" id="hamburgerBtn" aria-hidden="true"></i>
-    <!--div class="resume-btn"><i class="ti ti-download" style="font-size:13px; margin-right:6px;" aria-hidden="true"></i>Resume DL</div-->
+    <div class="resume-btn"><i class="ti ti-download" style="font-size:13px; margin-right:6px;" aria-hidden="true"></i>Resume DL</div>
   </header>
 
   <nav class="mobile-nav-menu" id="mobileNavMenu">
@@ -347,12 +422,12 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
 
   <section class="fv">
     <div class="eyebrow">FV — first view</div>
-    <div class="name">SASAKI WEB WORK</div>
-    <div class="role">Web Coder / Frontend Engineer</div>
+    <div class="name">SASAKI WEBWORK</div>
+    <div class="role">Web Coder / Frontend Engineer / Web Designer</div>
     <div class="scroll"><i class="ti ti-chevron-down" aria-hidden="true"></i>scroll</div>
   </section>
 
-  <section id="about" class="bento-wrap">
+  <section class="bento-wrap">
     <div class="section-label">Bento grid area</div>
     <div class="bento">
 
@@ -429,11 +504,11 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     </div>
   </section>
 
-  <section id="works" class="works-wrap">
+  <section class="works-wrap">
     <div class="section-label">Works — 実務実績（背景を透過するグラスカード）</div>
 
     <div class="work-card">
-      <div class="work-thumb"><img class="work-icon" src="img/thumb/kinyu.svg" alt="某金融コーポレートサイト" class="ti ti-photo" aria-hidden="true"/></div>
+      <div class="work-thumb"><img src="img/thumb/kinyu.svg" alt="某金融コーポレートサイト" class=" work-icon ti ti-photo" aria-hidden="true"></div>
       <div class="work-body">
         <div class="work-title">某金融コーポレートサイト リニューアル</div>
         <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">企業サイトのリニューアル案件。旧CMSのサポート終了に伴い、新規CMS（ヘッドレスCMS+SSG）への移行にあたってのデータ整備を担当。</div>
@@ -447,33 +522,44 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     </div>
 
     <div class="work-card">
-      <div class="work-thumb"><img class="work-icon" src="img/thumb/horse.svg" alt="某金融コーポレートサイト" class="ti ti-photo" aria-hidden="true"/></div>
+      <div class="work-thumb"><img src="img/thumb/recruit.svg" alt="某リクルートサイト更新" class=" work-icon ti ti-photo" aria-hidden="true"></div>
       <div class="work-body">
-        <div class="work-title">競馬予想サイトの作成</div>
-        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
-          競馬予想サイトの開発案件。ユーザーのニーズに応じたUI/UX設計と、前後の画面遷移を考慮したコーディングを担当。</div>
+        <div class="work-title">某リクルートサイト 更新</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">既存の就職情報マッチングサイトの更新案件。WEB制作チーム内で、既存のサイトデザインに合わせて新規作成する各画面のデザインを担当。</div>
         <div class="tags">
           <span class="tag">デザイン</span>
-          <span class="tag">コーディング／UI設計</span>
-          <span class="tag">HTML/CSS</span>
-          <span class="tag">JavaScript</span>
           <span class="tag">Figma</span>
         </div>
         <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
       </div>
     </div>
+    
     <div class="work-card">
-      <div class="work-thumb"><img class="work-image" src="img/thumb/web_gapporisushi.png" alt="某金融コーポレートサイト" class="ti ti-photo" aria-hidden="true"/></div>
+      <div class="work-thumb"><img src="img/thumb/horse.svg" alt="競馬予想情報提供サイト" class=" work-icon ti ti-photo" aria-hidden="true"></div>
       <div class="work-body">
-        <div class="work-title">ゲームLPの作成</div>
+        <div class="work-title">競馬予想情報提供サイト 制作</div>
         <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
-          競馬予想サイトの開発案件。ユーザーのニーズに応じたUI/UX設計と、前後の画面遷移を考慮したコーディングを担当。</div>
+          競馬予想情報提供サイトの制作案件。独自CMSに合わせPHPコーディングを担当。
+        </div>
         <div class="tags">
-          <span class="tag">デザイン</span>
           <span class="tag">コーディング／UI設計</span>
+          <span class="tag">Directus</span>
+          <span class="tag">JSX</span>
+        </div>
+        <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
+      </div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-thumb"><img src="img/thumb/web_gapporisushi.png" alt="アーケードゲームLPサイト" class="ti ti-photo" aria-hidden="true"></div>
+      <div class="work-body">
+        <div class="work-title">アーケードゲーム公式サイト作成</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          アーケードゲームの新規作成。デザイン提案からコーディング、納品やマニュアル作成までを担当。CSSアニメーションなども担当</div>
+        <div class="tags">
+          <span class="tag">デザイン／コーディング</span>
           <span class="tag">HTML/CSS</span>
           <span class="tag">JavaScript</span>
-          <span class="tag">Figma</span>
         </div>
         <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
       </div>
@@ -481,23 +567,7 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
 
   </section>
 
-  <section class="figma-wrap">
-    <div class="section-label">Figma gallery — デザイン制作事例</div>
-    <div class="figma-grid">
-      <div class="figma-card">
-        <div class="figma-thumb"><img src="img/thumb/figma_tokka.png" alt="Figma" class="ti ti-brand-figma" aria-hidden="true" /></div>
-        <div class="figma-name">競馬予想サイト「トッカ」ログイン前/後各画面</div>
-        <div class="figma-link"><a target="_blank" href="https://www.figma.com/design/1lncGE2rWrhtY1x13kXJan/%E7%AB%B6%E9%A6%AC%E4%BA%88%E6%83%B3%E3%82%B5%E3%82%A4%E3%83%88%E3%83%BB%E3%83%88%E3%83%83%E3%82%AB?node-id=0-1&t=HTi2Sf2aAUcdWa1L-1"><i class="ti ti-external-link" aria-hidden="true">Figma link</i></a></div>
-      </div>
-      <div class="figma-card">
-        <div class="figma-thumb"><img src="img/thumb/figma_umasugu.png" alt="Figma" class="ti ti-brand-figma" aria-hidden="true" /></div>
-        <div class="figma-name">競馬予想サイト LPデザイン</div>
-        <div class="figma-link"><a target="_blank" href="https://www.figma.com/design/yi0VHjvIQ1dsGd8TJvK5PD/%E3%81%86%E3%81%BE%E3%82%B9%E3%82%B0%EF%BC%81?node-id=0-1&t=485HZH7O6jPzfZcS-1"><i class="ti ti-external-link" aria-hidden="true">Figma link</i></a></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="sample" class="sample-wrap">
+  <section class="sample-wrap">
     <div class="section-label">サンプル制作 <span class="badge">実在しないデモ</span></div>
     <div class="sample-grid">
       <div class="sample-card">
@@ -511,10 +581,73 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     </div>
   </section>
 
+  <section class="figma-wrap">
+    <div class="section-label">Figma gallery — デザイン制作事例</div>
+    <div class="figma-grid">
+      <div class="figma-card">
+        <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
+        <div class="figma-name">例：ECサイト UIデザイン案</div>
+      </div>
+      <div class="figma-card">
+        <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
+        <div class="figma-name">例：コーポレートサイト ワイヤーフレーム</div>
+      </div>
+      <div class="figma-card">
+        <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
+        <div class="figma-name">例：モバイルアプリ UIキット</div>
+      </div>
+      <div class="figma-card">
+        <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
+        <div class="figma-name">例：LPデザイン案</div>
+      </div>
+    </div>
+  </section>
 
-  <footer id="contact">
+  <!-- NEW: UI Motion (Lottie) — placeholder scaffold. Replace data-lottie paths
+       with real .json exports from After Effects + Bodymovin when ready. -->
+  <section class="motion-wrap">
+    <div class="section-label">UI Motion <span class="badge">Lottie (.json) 対応</span></div>
+    <div class="motion-grid">
+
+      <div class="motion-tile" data-lottie="lottie/button_tap.json" data-caption="ボタン押下時のマイクロインタラクション">
+        <div class="phone-frame">
+          <div class="lottie-target"></div>
+          <div class="motion-fallback">
+            <i class="ti ti-hand-click" aria-hidden="true"></i>
+            <span>準備中</span>
+          </div>
+        </div>
+        <div class="motion-name">ボタン押下</div>
+      </div>
+
+      <div class="motion-tile" data-lottie="lottie/page_transition.json" data-caption="ページ遷移アニメーション">
+        <div class="phone-frame">
+          <div class="lottie-target"></div>
+          <div class="motion-fallback">
+            <i class="ti ti-arrows-shuffle" aria-hidden="true"></i>
+            <span>準備中</span>
+          </div>
+        </div>
+        <div class="motion-name">ページ遷移</div>
+      </div>
+
+      <div class="motion-tile" data-lottie="lottie/loading.json" data-caption="ローディング表現">
+        <div class="phone-frame">
+          <div class="lottie-target"></div>
+          <div class="motion-fallback">
+            <i class="ti ti-loader-2" aria-hidden="true"></i>
+            <span>準備中</span>
+          </div>
+        </div>
+        <div class="motion-name">ローディング</div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
     <div class="contact-lines">
-      <div class="contact-title">Contact</div>
+      <div class="section-label">Contact</div>
       <div class="contact-field">お名前</div>
       <div class="contact-field">メールアドレス</div>
       <div class="contact-field short">ご相談内容</div>
@@ -529,12 +662,23 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
 
 </div>
 
-<!-- Lightbox modal: shared by both banner carousels -->
+<!-- Banner lightbox (images) -->
 <div class="lightbox-overlay" id="lightboxOverlay">
   <div class="lightbox-content">
     <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">&times;</button>
     <img id="lightboxImg" src="" alt="">
     <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+<!-- Motion lightbox (Lottie, enlarged phone frame) -->
+<div class="lightbox-overlay" id="motionLightboxOverlay">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="motionLightboxClose" aria-label="閉じる">&times;</button>
+    <div class="phone-frame phone-frame-lg" id="motionLightboxFrame">
+      <div class="lottie-target" id="motionLightboxTarget"></div>
+    </div>
+    <div class="lightbox-caption" id="motionLightboxCaption"></div>
   </div>
 </div>
 
@@ -558,8 +702,6 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     if (window.innerWidth > 768){ mobileNavMenu.classList.remove('open'); }
   });
 
-  // Carousel: turns each [data-carousel] block into a slider with dots.
-  // Single-slide carousels (静止画バナー) just skip the dots/autoplay.
   document.querySelectorAll('[data-carousel]').forEach(function(carousel){
     var track = carousel.querySelector('.carousel-track');
     var slides = Array.prototype.slice.call(track.children);
@@ -594,7 +736,7 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
     resetTimer();
   });
 
-  // Lightbox: click/tap any banner image to view it large with its caption.
+  // Banner lightbox
   var lightboxOverlay = document.getElementById('lightboxOverlay');
   var lightboxImg = document.getElementById('lightboxImg');
   var lightboxCaption = document.getElementById('lightboxCaption');
@@ -623,8 +765,73 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; }
   lightboxOverlay.addEventListener('click', function(e){
     if (e.target === lightboxOverlay) closeLightbox();
   });
+
+  // UI Motion (Lottie) — placeholder scaffold.
+  // Each tile tries to load a .json that likely doesn't exist yet; on failure
+  // the fallback icon/label (already in the DOM) simply stays visible.
+  var motionLightboxOverlay = document.getElementById('motionLightboxOverlay');
+  var motionLightboxTarget = document.getElementById('motionLightboxTarget');
+  var motionLightboxCaption = document.getElementById('motionLightboxCaption');
+  var motionLightboxClose = document.getElementById('motionLightboxClose');
+  var largeMotionAnim = null;
+
+  if (window.lottie){
+    document.querySelectorAll('.motion-tile').forEach(function(tile){
+      var target = tile.querySelector('.lottie-target');
+      var fallback = tile.querySelector('.motion-fallback');
+      var path = tile.getAttribute('data-lottie');
+
+      var anim = lottie.loadAnimation({
+        container: target,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: path
+      });
+
+      anim.addEventListener('data_ready', function(){
+        if (fallback) fallback.style.display = 'none';
+      });
+      anim.addEventListener('data_failed', function(){
+        if (fallback) fallback.style.display = 'flex';
+      });
+
+      tile.addEventListener('click', function(){
+        openMotionLightbox(path, tile.getAttribute('data-caption'));
+      });
+    });
+  }
+
+  function openMotionLightbox(path, caption){
+    motionLightboxTarget.innerHTML = '';
+    if (largeMotionAnim){ largeMotionAnim.destroy(); largeMotionAnim = null; }
+    if (window.lottie){
+      largeMotionAnim = lottie.loadAnimation({
+        container: motionLightboxTarget,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: path
+      });
+    }
+    motionLightboxCaption.textContent = caption;
+    motionLightboxOverlay.classList.add('open');
+  }
+  function closeMotionLightbox(){
+    motionLightboxOverlay.classList.remove('open');
+    if (largeMotionAnim){ largeMotionAnim.destroy(); largeMotionAnim = null; }
+    motionLightboxTarget.innerHTML = '';
+  }
+  motionLightboxClose.addEventListener('click', closeMotionLightbox);
+  motionLightboxOverlay.addEventListener('click', function(e){
+    if (e.target === motionLightboxOverlay) closeMotionLightbox();
+  });
+
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'Escape'){
+      closeLightbox();
+      closeMotionLightbox();
+    }
   });
 </script>
 
