@@ -248,18 +248,31 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 
 /* ---------- Lightbox (shared visual style; used for both banner images and Lottie motion) ---------- */
 .lightbox-overlay{
-  display:none;
+  display:flex;
   position:fixed; inset:0;
   background:rgba(0,0,0,0.82);
   align-items:center; justify-content:center;
   z-index:999;
   padding:32px 20px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .6s ease, visibility .6s ease;
 }
-.lightbox-overlay.open{ display:flex; }
+.lightbox-overlay.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
 .lightbox-content{
   position:relative;
   max-width:92vw; max-height:88vh;
   display:flex; flex-direction:column; align-items:center; gap:10px;
+  transform:scale(.94);
+  transition:transform .6s ease;
+}
+.lightbox-overlay.open .lightbox-content{
+  transform:scale(1);
 }
 .lightbox-content img{
   max-width:92vw; max-height:76vh;
@@ -1049,6 +1062,40 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
       });
     });
   }
+  // スムーズスクロール（グローバルナビ・GOTOP共通）
+  function smoothScrollTo(targetY, duration){
+    var startY = window.scrollY;
+    var diff = targetY - startY;
+    var startTime = null;
+  
+    function step(timestamp){
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = progress < 0.5
+        ? 2 * progress * progress
+        : -1 + (4 - 2 * progress) * progress; // easeInOutQuad
+      window.scrollTo(0, startY + diff * eased);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  
+  document.querySelectorAll('nav.desktop-nav a, .mobile-nav-menu a, .gotop a').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var href = link.getAttribute('href');
+      if (href && href.charAt(0) === '#'){
+        var targetEl = document.querySelector(href);
+        if (targetEl){
+          e.preventDefault();
+          var targetY = targetEl.getBoundingClientRect().top + window.scrollY;
+          smoothScrollTo(targetY, 700);
+          if (typeof mobileNavMenu !== 'undefined' && mobileNavMenu){
+            mobileNavMenu.classList.remove('open');
+          }
+        }
+      }
+    });
+  });
 </script>
 
 </body>
