@@ -1,428 +1,1106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NLG8MNB');</script>
-    <!-- End Google Tag Manager -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="WEBデザイナー・佐々木のポートフォリオサイトです。">
-    <!--meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache"-->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Sasaki Webwork</title>
-    <!--link rel="stylesheet" type="text/css" href="css/reset.css"-->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/style_add.css">
-    <!--link rel="stylesheet" type="text/css" href="css/slick.css">
-    <link rel="stylesheet" type="text/css" href="css/slick-style.css">
-    <link rel="stylesheet" type="text/css" href="css/lightbox.css"-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Site — Wireframe (Responsive)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+<style>
+:root{
+  --bg:#f5f5f7;
+  --surface-0:#ffffff;
+  --surface-1:#f7f7f8;
+  --surface-2:#eeeef0;
+  --border:#d8d8dc;
+  --border-strong:#b9b9c0;
+  --text-primary:#1f1f23;
+  --text-secondary:#5b5b63;
+  /*--text-muted:#9a9aa2;*/
+  --text-muted:#59595e;
+  --accent:#6b6bf2;
+  /*
+  --radius:8px;
+  --radius-lg:14px;
+  */
+  --radius:min(1vw, 8px);
+  --radius-lg:min(2vw,14px);
+  --font-primary: min(3vw, 24px);
+  --font-secondary: min(2vw, 16px);
+  --transparent-1: rgba(255,255,255,0.32);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--text-primary);
+  padding:24px 12px 60px;
+  font-size:var(--font-secondary);
+}
+
+.bg-scene{
+  position:fixed; inset:0; z-index:-1;
+  /*
+  background:
+    radial-gradient(560px circle at 12% 18%, rgba(107,107,242,0.32), transparent 62%),
+    radial-gradient(480px circle at 88% 12%, rgba(255,159,67,0.26), transparent 60%),
+    radial-gradient(620px circle at 50% 92%, rgba(72,219,193,0.26), transparent 62%),
+    var(--bg);
+    */
+  background:url(img/bg.jpeg);
+}
+
+.mode-flag{
+  max-width:1040px;
+  margin:0 auto 14px;
+  text-align:center;
+  font-size:11px;
+  color:var(--text-secondary);
+  border:1px dashed var(--border-strong);
+  border-radius:var(--radius);
+  padding:6px 10px;
+  background:var(--surface-0);
+}
+.mode-flag b{color:var(--text-primary);}
+.page{
+  max-width:1040px;
+  margin:0 auto;
+  border:1px solid var(--border-strong);
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  /*
+  background:transparent;
+  */
+  background:#ffffff55;
+  backdrop-filter: blur(5px);
+}
+section, header, footer{ position:relative; z-index:1; }
+
+/* ---------- Header ---------- */
+header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 20px; height:56px; border-bottom:1px solid var(--border);
+  /*background:var(--surface-0);*/
+  color:var(--surface-0);
+}
+.logo{ font-size:13px; font-weight:600; }
+nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-secondary); }
+.resume-btn{
+  display:none;
+  border:1px solid var(--border-strong); border-radius:var(--radius);
+  padding:4px 12px; font-size:11px; color:var(--text-secondary);
+}
+.hamburger{ font-size:20px; color:var(--text-secondary); cursor:pointer; }
+
+.mobile-nav-menu{
+  display:none; flex-direction:column;
+  border-bottom:1px solid var(--border);
+  /*background:var(--surface-0);*/
+}
+.mobile-nav-menu.open{ display:flex; }
+.mobile-nav-menu a{
+  padding:12px 20px; font-size:13px; color:var(--text-secondary);
+  text-decoration:none; border-top:1px solid var(--border);
+}
+.mobile-nav-menu a i{ margin-right:8px; font-size:14px; color:var(--text-muted); }
+
+/* ---------- FV ---------- */
+.fv{
+  height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:8px; border-bottom:1px solid var(--border); text-align:center; padding:0 16px;
+  background:url(img/fv_ai.png) no-repeat center/cover;
+  text-shadow: 2px 0px min(1vw, 4px) #ffffff,
+  0px 2px min(1vw, 4px) #ffffff,
+  0px 0px min(1vw, 4px) #ffffff,
+  0px -2px min(1vw, 4px) #FFFFFF;
+}
+.fv .eyebrow{ font-size:11px; color:var(--text-muted); letter-spacing:1px; }
+.fv .name{ font-size:28px; font-weight:600; }
+.fv .role{ font-size:13px; color:var(--text-secondary); }
+.fv .scroll{ margin-top:10px; font-size:10px; color:var(--text-muted); display:flex; align-items:center; gap:4px; }
+
+.bento-wrap, 
+.sample-wrap, 
+.motion-wrap{ 
+  background:var(--transparent-1);
+}
+.bento-wrap .section-label, 
+  .sample-wrap .section-label, 
+  .motion-wrap .section-label,
+  footer .section-label{ 
+  color:var(--text-primary);
+}
+/* ---------- Bento ---------- */
+.bento-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); 
+  /*background:var(--surface-1); */
+}
+.section-label{ 
+  /*
+  font-size:11px; 
+  color:var(--text-muted); 
+  */
+  color:var(--surface-0);
+  font-size:var(--font-primary); 
+  margin-bottom:10px; display:flex; align-items:center; gap:6px; 
+}
+
+.badge{ font-size:9px; border:1px solid var(--border-strong); border-radius:var(--radius); padding:1px 6px; 
+/*  color:var(--text-secondary); */
+  background:var(--accent); 
+  color:var(--surface-0); 
+}
+
+.bento{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+.cell{
+  border:1px solid var(--border-strong); border-radius:12px; background:var(--surface-2);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  min-height:64px; padding:8px; text-align:center;
+}
+.cell i{ font-size:16px; color:var(--text-secondary); }
+.cell span.label{ font-size:11px; color:var(--text-primary); }
+.cell span.sub{ font-size:9px; color:var(--text-muted); }
+.cell.skills{ grid-column: 1 / span 2; min-height:100px; }
+.cell.profile{ grid-column: 1 / span 2; }
+.cell.stat-num{ font-size:17px; font-weight:600; color:var(--text-primary); }
+.cell.skills{ align-items:flex-start; text-align:left; padding:14px; }
+.cell.skills .label{ display:flex; align-items:center; gap:6px; }
+.skills-list{ margin:6px 0 0; padding-left:18px; font-size:11px; color:var(--text-secondary); text-align:left; width:100%; }
+.skills-list li{ margin-bottom:3px; }
+
+.contact-field,
+.contact-form{ 
+  width:100%;
+
+}
+.contact-field{
+  border:1px solid var(--border); border-radius:var(--radius);
+  padding:6px 10px; font-size:11px; color:var(--text-muted); 
+}
+.contact-field.short{ width:60%; }
+
+.contact-form{ 
+  display:flex; 
+  flex-direction:column; 
+  gap:6px; 
+  width:100%;
+}
+.contact-form textarea.contact-field{ resize:vertical; font-family:inherit; }
+.contact-submit{
+  border:1px solid var(--border-strong); border-radius:var(--radius);
+  padding:8px 14px; font-size:11px; color:var(--text-secondary);
+  background:var(--surface-0); cursor:pointer;
+  display:flex; align-items:center; gap:6px; width:fit-content;
+}
+.contact-submit:hover{ background:var(--surface-2); }
+.contact-submit:disabled{ opacity:.6; cursor:not-allowed; }
+.contact-status{ font-size:11px; margin-top:2px; }
+.contact-status.success{ color:#1a8f4c; }
+.contact-status.error{ color:#c0392b; }
+
+/* ---------- Banner carousel (GIF / static) ---------- */
+.cell.gif-banner,
+.cell.static-banner{
+  align-items:stretch;
+  justify-content:flex-start;
+  padding:10px;
+  gap:6px;
+  grid-column: 1 / span 2;
+}
+.banner-carousel{
+  position:relative;
+  width:100%;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border-radius:var(--radius);
+  background:var(--surface-1);
+  min-height:90px;
+}
+.carousel-track{
+  display:flex;
+  flex:1;
+  transition:transform .4s ease;
+}
+.carousel-slide{
+  min-width:100%;
+  display:flex;
+  flex-direction:column;
+}
+.carousel-slide img{
+  width:100%;
+  flex:1;
+  object-fit:cover;
+  display:block;
+  cursor:zoom-in;
+}
+.carousel-slide .sub{ font-size:9px; color:var(--text-muted); text-align:center; padding:4px 2px; }
+.carousel-dots{
+  display:flex; justify-content:center; gap:4px; margin-top:6px;
+}
+.carousel-dots button{
+  width:6px; height:6px; border-radius:50%; border:none;
+  background:var(--border-strong); padding:0; cursor:pointer;
+}
+.carousel-dots button.active{ background:var(--accent); }
+
+/* ---------- Lightbox (shared visual style; used for both banner images and Lottie motion) ---------- */
+.lightbox-overlay{
+  display:flex;
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.82);
+  align-items:center; justify-content:center;
+  z-index:999;
+  padding:32px 20px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+.lightbox-overlay.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+.lightbox-content{
+  position:relative;
+  max-width:92vw; max-height:88vh;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  transform:scale(.94);
+  transition:transform .6s ease;
+}
+.lightbox-overlay.open .lightbox-content{
+  transform:scale(1);
+}
+.lightbox-content img{
+  max-width:92vw; max-height:76vh;
+  object-fit:contain;
+  border-radius:var(--radius);
+  background:#000;
+}
+.lightbox-caption{ color:#fff; font-size:13px; text-align:center; }
+.lightbox-close{
+  position:absolute; top:-38px; right:0;
+  background:none; border:none; color:#fff;
+  font-size:30px; line-height:1; cursor:pointer; padding:4px 8px;
+}
+
+/* ---------- Works — glassmorphism zone ---------- */
+.works-wrap{ padding:28px 16px; display:flex; flex-direction:column; gap:16px; background:transparent; }
+.work-card{
+  border:1px solid rgba(255,255,255,0.55);
+  border-radius:16px;
+  padding:16px;
+  display:flex; flex-direction:column; gap:8px;
+  background:rgba(255,255,255,0.32);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(31,31,35,0.10);
+}
+.work-thumb{
+  width:100%; height:100px; border:1px dashed var(--border-strong); border-radius:var(--radius);
+  display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:18px;
+  overflow:hidden;
+  /*
+  background:rgba(255,255,255,0.25);*/
+  background:rgba(255,255,255,1);
+}
+.work-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.work-thumb .work-icon{
+  width:auto; 
+  height:100%; 
+  object-fit:contain; display:block;
+}
+.work-title{ font-size:13px; font-weight:500; }
+.tags{ display:flex; gap:6px; flex-wrap:wrap; }
+.tag{
+  font-size:10px; color:var(--text-secondary);
+  border:1px solid rgba(255,255,255,0.6); background:rgba(255,255,255,0.35);
+  border-radius:var(--radius); padding:2px 8px;
+}
+.figma-link{ font-size:11px; color:var(--accent); display:flex; align-items:center; gap:4px; }
+
+/* ---------- Sample works ---------- */
+.sample-wrap{ padding:18px 16px; border-bottom:1px solid var(--border);
+  /*background:var(--surface-1); */
+}
+.sample-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.sample-card{
+  border:1px dashed var(--border-strong); border-radius:12px; padding:10px;
+  display:flex; flex-direction:column; gap:8px;
+    background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(31, 31, 35, 0.10);
+}
+.sample-thumb{
+  width:100%; 
+  /*height:80px; */
+  height:min(50vw,300px); 
+  border:1px dashed var(--border-strong); border-radius:var(--radius);
+  display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:16px;
+  overflow:hidden;
+}
+.sample-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.sample-name{ font-size:11px; color:var(--text-primary); }
+.sample-link {
+  margin-top: min(2vw, 8px);
+}
+.sample-link a{
+  display:inline-block;
+  width:fit-content;
+  padding:min(.5vw,2px) min(2vw,8px);
+  text-decoration:none; 
+  background:var(--surface-1);
+  color:var(--accent); 
+  display:flex; 
+  align-items:center; 
+  gap:4px;
+}
+.sample-link a:hover{
+  background:var(--accent);
+  color:var(--surface-1);
+
+}
+
+/* ---------- Figma gallery ---------- */
+.figma-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); 
+/*  background:var(--surface-1); */
+}
+.figma-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.figma-card{
+  border:1px solid var(--border-strong); border-radius:12px; padding:8px;
+  display:flex; flex-direction:column; gap:6px;
+      background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(31, 31, 35, 0.10);
+}
+.figma-thumb{
+  width:100%; height:56px; border:1px dashed var(--border-strong); border-radius:var(--radius);
+  display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:14px;
+  overflow:hidden;
+}
+.figma-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.figma-name{ font-size:10px; color:var(--text-primary); }
+
+/* ---------- UI Motion (Lottie) — NEW ----------
+   Placeholder scaffold: data-lottie paths point at files that don't exist
+   yet. Each tile shows a fallback icon/label until a real .json is dropped
+   in at that path — nothing looks broken in the meantime. */
+.motion-wrap{ padding:18px 16px; border-bottom:1px solid var(--border); 
+  /*background:var(--surface-1); */
+}
+.motion-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.motion-tile{
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  cursor:zoom-in;
+}
+.phone-frame{
+  width:100%; aspect-ratio:9/16; max-height:170px;
+  border:2px solid var(--border-strong); border-radius:16px;
+  background:var(--surface-2);
+  overflow:hidden; position:relative;
+}
+.phone-frame .lottie-target{
+  position:absolute; inset:0;
+}
+.phone-frame .motion-fallback{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  color:var(--text-muted);
+}
+.phone-frame .motion-fallback i{ font-size:20px; }
+.phone-frame .motion-fallback span{ font-size:9px; }
+.motion-name{ font-size:10px; color:var(--text-primary); text-align:center; }
+.phone-frame-lg{
+  width:220px; max-height:none; aspect-ratio:9/16;
+  margin:0 auto;
+}
+
+/* ---------- Footer ---------- */
+footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; background:var(--surface-1); }
+.contact-lines{ display:flex; flex-direction:column; gap:6px; }
+.contact-title{ font-size:12px; }
+.pdf-buttons{
+  display:flex; gap:10px; flex-wrap:wrap;
+}
+.pdf-btn{
+  border:1px solid var(--border-strong); border-radius:var(--radius); padding:8px 14px;
+  font-size:11px; color:var(--text-secondary); display:flex; align-items:center; gap:6px; width:fit-content;
+  background:var(--accent); color:var(--surface-0);
+}
+.pdf-btn a{
+  text-decoration:none; color:inherit;
+}
+.pdf-btn:hover{
+  background:var(--surface-0); color:var(--accent);
+}
+.sns{ display:flex; gap:14px; color:var(--text-muted); font-size:16px; }
+.gotop{
+  position:fixed; bottom:20px; right:20px; z-index:999;
+  background:var(--surface-1); color:var(--accent);
+  border-radius:var(--radius); padding:6px 12px; 
+  text-decoration:none;
+  /*font-size:11px;*/
+  font-size:var(--font-primary);
+}
+.gotop a{
+  text-decoration:none; color:inherit;
+}
+.gotop:hover{
+  background:var(--accent); color:var(--surface-0);
+}
+
+/* =========================================================
+   BREAKPOINT: mobile-first base above, desktop overrides below
+   ========================================================= */
+@media (min-width: 769px){
+  .mode-mobile{ display:none !important; }
+  .mode-desktop{ display:inline !important; }
+
+  nav.desktop-nav{ display:flex; }
+  nav.desktop-nav a{ 
+    text-decoration:none; color:var(--text-secondary); font-size:12px; display:flex; align-items:center; gap:4px;
+    color:var(--surface-0)
+  }
+  nav.desktop-nav a:hover{ 
+    color:var(--accent);
+  }
+  .resume-btn{ display:flex; align-items:center; }
+  .hamburger{ display:none; }
+  .mobile-nav-menu{ display:none !important; }
+
+  .fv{ height:280px; }
+  .fv .name{ font-size:36px; }
+  .fv .role{ font-size:15px; }
+
+  .bento{
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 84px 84px 64px 240px;
+  }
+  .cell.skills{ grid-column:1 / span 2; grid-row:1 / span 2; }
+  .cell.availability{ grid-column:3; grid-row:1; }
+  .cell.github{ grid-column:4; grid-row:1; }
+  .cell.profile{ grid-column:3 / span 2; grid-row:2; }
+  .cell.exp-years{ grid-column:1; grid-row:3; }
+  .cell.strength{ grid-column:2; grid-row:3; }
+  .cell.gif-banner{ grid-column:1 / span 2; grid-row:4; }
+  .cell.static-banner{ grid-column:3 / span 2; grid-row:4; }
+
+  .work-card{ flex-direction:row; gap:18px; }
+  .work-thumb{ width:200px; height:120px; flex-shrink:0; }
+  .work-body{ flex:1; display:flex; flex-direction:column; gap:8px; justify-content:center; }
+
+  .sample-grid{ grid-template-columns: repeat(3, 1fr); }
+  .figma-grid{ grid-template-columns: repeat(4, 1fr); }
+  .motion-grid{ grid-template-columns: repeat(3, 1fr); }
+
+  footer{ 
+     flex-direction:row;
+     justify-content:space-between; 
+     align-items:flex-start;
+  }
+}
+</style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NLG8MNB"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
- <header>
-    <nav class="sp-only">
-        <div class="gnav-toggle">
-          <input id="gnav-input" type="checkbox" class="gnav-hidden">
-          <label id="gnav-open" for="gnav-input"><span></span></label>
-          <label class="gnav-unshown" id="gnav-close" for="gnav-input"></label>
-          <div id="gnav-content" class="gnav-content">
-            <ul class="gnav-menu">
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#profile">PROFILE</a></li>
-                <li><a href="#career">CAREER</a></li>
-                <li><a href="#work">WORK</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
+
+<div class="bg-scene" aria-hidden="true"></div>
+
+<!--div class="mode-flag">
+  現在の表示モード：
+  <b class="mode-mobile">モバイル（〜768px）</b>
+  <b class="mode-desktop" style="display:none;">デスクトップ（769px〜）</b>
+  ／ブラウザ幅を変えると自動で切り替わります
+</div-->
+
+<div class="page">
+
+  <header id="top">
+    <div class="logo">SASAKI WEB WORK / Hiroshi</div>
+    <nav class="desktop-nav">
+      <a class="desktop-nav-link" href="#about"><span>About</span></a>
+      <a class="desktop-nav-link" href="#works"><span>Works</span></a>
+      <a class="desktop-nav-link" href="#contact"><span>Contact</span></a>
+    </nav>
+    <i class="ti ti-menu-2 hamburger" id="hamburgerBtn" aria-hidden="true"></i>
+    <!--div class="resume-btn"><i class="ti ti-download" style="font-size:13px; margin-right:6px;" aria-hidden="true"></i>Resume DL</div-->
+  </header>
+
+  <nav class="mobile-nav-menu" id="mobileNavMenu">
+    <a href="#about"><i class="ti ti-user" aria-hidden="true"></i>About</a>
+    <a href="#works"><i class="ti ti-layout-grid" aria-hidden="true"></i>Works</a>
+    <a href="#contact"><i class="ti ti-mail" aria-hidden="true"></i>Contact</a>
+  </nav>
+
+  <section class="fv">
+    <div class="eyebrow">FV — first view</div>
+    <div class="name">SASAKI WEBWORK</div>
+    <div class="role">Web Coder / Frontend Engineer / Web Designer</div>
+    <div class="scroll"><i class="ti ti-chevron-down" aria-hidden="true"></i>scroll</div>
+  </section>
+
+  <section class="bento-wrap">
+    <div class="section-label">Bento grid area</div>
+    <div class="bento">
+
+      <div class="cell skills">
+        <span class="label"><i class="ti ti-code" aria-hidden="true"></i>Skills</span>
+        <ul class="skills-list">
+          <li>HTML/CSS — 14年</li>
+          <li>JavaScript — 6年</li>
+          <li>PHP — 12年</li>
+          <li>Figma — 4年</li>
+        </ul>
+      </div>
+
+      <div class="cell availability">
+        <i class="ti ti-circle-dot" aria-hidden="true"></i>
+        <span class="label">稼働状況</span>
+        <span class="sub">現在即時対応可能</span>
+      </div>
+
+      <div class="cell github">
+        <i class="ti ti-brand-github" aria-hidden="true"></i>
+        <span class="label">GitHub</span>
+        <span class="sub"><a target="_blank" href="https://github.com/sasaki-compass/portfolio">Portfolio</a> / 2026</span>
+      </div>
+
+      <div class="cell profile">
+        <i class="ti ti-user" aria-hidden="true"></i>
+        <span class="label">Profile summary</span>
+        <span class="sub">Webコーダー・フロントエンドエンジニア14年目／UI実装〜デザインまで対応</span>
+      </div>
+
+      <div class="cell exp-years">
+        <span class="stat-num">14年</span>
+        <span class="sub">経験年数</span>
+      </div>
+
+      <div class="cell strength">
+        <i class="ti ti-star" aria-hidden="true"></i>
+        <span class="label">得意分野</span>
+        <span class="sub">Figma設計</span>
+        <span class="sub">JSやCSSでのアニメーション実装</span>
+      </div>
+
+      <div class="cell gif-banner">
+        <span class="label"><i class="ti ti-player-play" aria-hidden="true"></i>GIFバナー</span>
+        <div class="banner-carousel" data-carousel>
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="img/banner/gif_banner_01.gif" alt="WebサービスGiFバナー制作サンプル">
+              <span class="sub">WebサービスGiFバナー制作サンプル</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="img/banner/gif_banner_02.gif" alt="WebサービスGiFバナー制作サンプル">
+              <span class="sub">WebサービスGiFバナー制作サンプル</span>
+            </div>
+          </div>
+          <div class="carousel-dots"></div>
+        </div>
+      </div>
+
+      <div class="cell static-banner">
+        <span class="label"><i class="ti ti-photo" aria-hidden="true"></i>静止画バナー</span>
+        <div class="banner-carousel" data-carousel>
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="img/banner/chojo.png" alt="新商品リリース告知バナー制作サンプル">
+              <span class="sub">新商品リリース告知</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="img/banner/christmas.png" alt="クリスマスキャンペーンバナー">
+              <span class="sub">クリスマスキャンペーン</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="img/banner/keiba_banner_01.png" alt="競馬キャンペーンバナー">
+              <span class="sub">競馬キャンペーン</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="img/banner/gold_hit.png" alt="宝くじキャンペーンバナー">
+              <span class="sub">宝くじキャンペーン</span>
+            </div>
+          </div>
+          <div class="carousel-dots"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="works-wrap">
+    <div class="section-label">Works — 実務実績（背景を透過するグラスカード）</div>
+
+    <div class="work-card">
+      <div class="work-thumb"><img src="img/thumb/kinyu.svg" alt="某金融コーポレートサイト" class=" work-icon ti ti-photo" aria-hidden="true"></div>
+      <div class="work-body">
+        <div class="work-title">某金融コーポレートサイト リニューアル</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">企業サイトのリニューアル案件。旧CMSのサポート終了に伴い、新規CMS（ヘッドレスCMS+SSG）への移行にあたってのデータ整備を担当。</div>
+        <div class="tags">
+          <span class="tag">コーディング</span>
+          <span class="tag">UI設計</span>
+          <span class="tag">Directus</span>
+          <span class="tag">JSX</span>
+        </div>
+        <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
+      </div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-thumb"><img src="img/thumb/recruit.svg" alt="某リクルートサイト更新" class=" work-icon ti ti-photo" aria-hidden="true"></div>
+      <div class="work-body">
+        <div class="work-title">某リクルートサイト 更新</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">既存の就職情報マッチングサイトの更新案件。WEB制作チーム内で、既存のサイトデザインに合わせて新規作成する各画面のデザインを担当。</div>
+        <div class="tags">
+          <span class="tag">デザイン／UI設計</span>
+          <span class="tag">Figma</span>
+        </div>
+        <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
+      </div>
+    </div>
+    
+    <div class="work-card">
+      <div class="work-thumb"><img src="img/thumb/horse.svg" alt="競馬予想情報提供サイト" class=" work-icon ti ti-photo" aria-hidden="true"></div>
+      <div class="work-body">
+        <div class="work-title">競馬予想情報提供サイト 制作</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          競馬予想情報提供サイトの制作案件。独自CMSに合わせPHPコーディングを担当。
+        </div>
+        <div class="tags">
+          <span class="tag">デザイン／UI設計</span>
+          <span class="tag">コーディング</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">PHP</span>
+        </div>
+        <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
+      </div>
+    </div>
+    
+    <div class="work-card">
+      <div class="work-thumb"><img src="img/thumb/blacksmith.svg" alt="金属加工サービス サイト更新" class=" work-icon ti ti-photo" aria-hidden="true"></div>
+      <div class="work-body">
+        <div class="work-title">金属加工サービス サイト更新</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          オンライン金属加工サービスのサイト更新案件。既存のデザインに合わせて新規ページの制作を担当。
+        </div>
+        <div class="tags">
+          <span class="tag">コーディング／UI設計</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">PHP</span>
+        </div>
+        <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb"><img src="img/thumb/web_gapporisushi.png" alt="アーケードゲームLPサイト" class="ti ti-photo" aria-hidden="true"></div>
+      <div class="work-body">
+        <div class="work-title">アーケードゲーム公式サイト作成</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          アーケードゲームの公式LP新規作成。デザイン提案からコーディング、納品やマニュアル作成までを担当。CSSアニメーションなども担当</div>
+        <div class="tags">
+          <span class="tag">デザイン／コーディング</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="work-card">
+      <div class="work-thumb">
+        <a target="_blank" href="https://tuku-shinbo.com/" >
+          <img src="img/thumb/web_rentalfarm.png" alt="レンタルファーム サイト作成" class="ti ti-photo" aria-hidden="true">
+        </a>
+      </div>
+      <div class="work-body">
+        <div class="work-title">レンタルファーム サイト作成</div>
+        <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
+          レンタルファームのサイトリニューアル。デザイン提案からコーディング、納品やマニュアル作成までを担当。</div>
+        <div class="tags">
+          <span class="tag">デザイン／コーディング</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="sample-wrap">
+    <div class="section-label">サンプル制作 <span class="badge">実在しないデモ</span></div>
+    <div class="sample-grid">
+      <div class="sample-card">
+        <div class="sample-thumb">
+          <a target="_blank" href="https://sasakiweb.work/radio_ko-dy/" >
+          <img src="img/thumb_wp_radio.png" alt="架空ラジオ局サイト">
+        </a>
+        </div>
+        <div class="sample-name">架空ラジオ局サイト</div>
+      </div>
+      <div class="sample-card">
+        <div class="sample-thumb">
+          <a target="_blank" href="https://sasakiweb.work/akebino/" >
+            <img src="img/thumb_akebi.png" alt="架空自治体サイト">
+          </a>
+        </div>
+        <div class="sample-name">架空自治体サイト</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="figma-wrap">
+    <div class="section-label">Figma gallery — デザイン制作事例</div>
+    <div class="figma-grid">
+      <div class="figma-card">
+        <div class="figma-thumb">
+          <a target="_blank" href="https://www.figma.com/design/1lncGE2rWrhtY1x13kXJan/%E7%AB%B6%E9%A6%AC%E4%BA%88%E6%83%B3%E3%82%B5%E3%82%A4%E3%83%88%E3%83%BB%E3%83%88%E3%83%83%E3%82%AB?t=DzphC3jyR2ds1t0F-1">
+            <img src="img/thumb/figma_tokka.png" class="ti ti-brand-figma" aria-hidden="true"/>
+          </a>
+        </div>
+        <div class="figma-name">競馬予想サイト ログイン前/後デザイン案</div>
+      </div>
+      <div class="figma-card">
+        <div class="figma-thumb">
+          <a target="_blank" href="https://www.figma.com/design/yi0VHjvIQ1dsGd8TJvK5PD/%E3%81%86%E3%81%BE%E3%82%B9%E3%82%B0%EF%BC%81?node-id=0-1&t=485HZH7O6jPzfZcS-1">
+            <img src="img/thumb/figma_umasugu.png" class="ti ti-brand-figma" aria-hidden="true"/>
+          </a>
+        </div>
+        <div class="figma-name">競馬予想サイト ログイン前LPデザイン案</div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- NEW: UI Motion (Lottie) — placeholder scaffold. Replace data-lottie paths
+       with real .json exports from After Effects + Bodymovin when ready. -->
+  <section class="motion-wrap">
+    <div class="section-label">UI Motion <span class="badge">Lottie (.json) 対応</span></div>
+    <div class="motion-grid">
+
+      <div class="motion-tile" data-lottie="lottie/button_tap.json" data-caption="ボタン押下時のマイクロインタラクション">
+        <div class="phone-frame">
+          <div class="lottie-target"></div>
+          <div class="motion-fallback">
+            <i class="ti ti-hand-click" aria-hidden="true"></i>
+            <span>準備中</span>
           </div>
         </div>
-      </nav>
+        <div class="motion-name">ボタン押下</div>
+      </div>
 
-      <nav class="pc-only gnav">
-        <ul>
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#profile">PROFILE</a></li>
-            <li><a href="#career">CAREER</a></li>
-            <li><a href="#work">WORK</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-        </ul>
-    </nav>
- </header>
- <main>
-  <section id="home" class="home container" data-section-name="Home">
-    <section class="contents contents--top">
-        <section>
-            <section class="title">
-                <h1><img src="img/title_orange.png" alt="SASAKI WEBWORK"></h1>
-            </section>
-            <section class="dog"><img src="img/dog_anime.png" alt=""></section>
-            <section class="whatsnew">
-                <button id="modalOpen" class="button">What's new</button>
-                <div id="easyModal" class="modal">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1>最新情報</h1>
-                      <span ID="modalClose" class="modalClose">×</span>
-                    </div>
-                    <div class="modal-body">
-                      <section class="timeline">
-                          <p>2025/12/18</p>
-                          <p>最新の情報に更新しました。</p>
-                          <p>2022/09/21</p>
-                          <p>業務実績を記載した「CAREER」項目を追加しました。<br>
-                             詳細を記したスキルシートもご覧になれます。</p>
-                          <p>2022/08/17</p>
-                          <p>このWhat's Newウインドウを追加しました。</p>
-                          <p>2022/08/03</p>
-                          <p>ポートフォリオサイトリニューアル</p>
-                      </section>
-                    </div>
-                  </div>
-                </div>              
-            </section>
-            <section class="godown">
-                <section class="downplease">down<span>↓</span></section>
-            </section>
-        </section>
-        <section class="mv">
-            <h2><a href="bit_record/" target="_blank">SAMPLE SITE:BIT RECORDS</a></h2>
-            <a href="bit_record/" target="_blank">
-                <video src="movie/bit_records.mp4" autoplay muted playsinline loop controls="false" class="bg" alt="メインビジュアル"></video>
-            </a>
-        </section>
-    </section>
-  </section>
-  <section id="about" class="about container" data-section-name="About">
-    <section class="contents contents--top">
-        <h2><img src="img/title_about_white.png" alt="ABOUT"></h2>
-        <h3>SASAKIについて</h3>
-        <section class="about-list">
-            <ul>
-                <li><span class="item">氏名</span><span>SASAKI</span></li>
-                <li><span class="item">技術</span><span>WEBデザイン等</span></li>
-                <li><span class="item">使用言語</span><span>HTML/CSS, JS, PHP</span></li>
-                <li><span class="item">使用ツール</span><span>Visual Studio Code, WordPress, <br>
-                Adobe Photoshop, Illustrator, AfterEffect<br>
-                Figma,Adobe XD<br>
-                CLIP Studio Paint,Blender<br>
-                </span></li>
-            </ul>
-        </section>
-    </section>
-  </section>
-  <section id="profile" class="profile container" data-section-name="About">
-    <section class="contents contents--profile">
-        <h2><img src="img/title_profile.png" alt="PROFILE"></h2>
-        <h3>経歴</h3>
-        <section class="timeline">
-            <section class="inner-box">
-                <h4>大学卒業以降</h4>
-                <ul>
-                    <li><span>2010年</span><span>専修大学文学部卒業</span></li>
-                    <li><span>2012年</span><span>株式会社NeNeに入社</span></li>
-                    <li><span>2022年</span><span>前職を離職</span></li>
-                    <li><span>2023年</span><span>C株式会社に入社<br>SEとして出向</span></li>
-                    <li><span>2025年</span><span>現在</span></li>
-                </ul>
-            </section>
-        </section>
-    </section>
-  </section>
-  <section id="career" class="career container" data-section-name="Career">
-    <section class="contents contents--top">
-        <h2><img src="img/title_career.png" alt="CAREER"></h2>
-        <h3>業務実績</h3>
-        <section class="career-list">
-            <ul>
-                <li><h4 class="item">WEBサイト</h4>
-                <ul class="item-list">
-                    <li><h5>アミューズメント向けメダルゲーム公式サイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS、Wordpress<br>
-                        サイト設計・コーディング・SEO施策
-                     </span></li>
-                    <li><h5>飲食店グループコーポレートサイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS、Wordpress<br>
-                        サイト設計・コーディング・SEO施策
-                     </span></li>
-                    <li><h5>WEB制作・ゲーム会社コーポレートサイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS、Wordpress<br>
-                        サイト設計・コーディング・SEO施策・サイト運営
-                     </span></li>
-                    <li><h5>東京都内美容室公式サイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS<br>
-                        サイト設計・コーディング・SEO施策
-                     </span></li>
-                    <li><h5>高級時計通販サイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS、Wordpress<br>
-                        サイト設計・コーディング・SEO施策・サイト運営
-                     </span></li>
-                    <li><h5>研磨・加工電工株式会社サイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS<br>
-                        サイト設計・コーディング・SEO施策
-                     </span></li>
-                    <li><h5>千葉県レンタルファームサイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS<br>
-                        サイト設計・コーディング・SEO施策
-                     </span></li>
-                    <li><h5>ポルシェ専門自動車店サイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS<br>
-                        サイト設計・コーディング・SEO施策
-                     </span></li>
-                    <li><h5>都内介護・看護サービスグループサイト</h5>
-                     <span>
-                        使用ツール・言語：HTML/CSS、Wordpress<br>
-                        サイト設計・コーディング・SEO施策
-                     </span></li>
-                 </ul></li>
-                <li><h4 class="item">ゲーム制作</h4>
-                    <ul class="item-list">
-                        <li><h5>AppleArcade展開RPG</h5>
-                         <span>
-                            使用ツール・言語：Adobe Photoshop、Autodesk Maya、Unity、HTML/CSS<br>
-                            3Dモデル・モーション制作
-                         </span></li>
-                        <li><h5>スマートフォン向けソーシャルRPG</h5>
-                         <span>
-                            使用ツール・言語：Adobe Photoshop、Autodesk 3dsMax、Unity、HTML/CSS<br>
-                            3Dモデル・モーション制作、アプリ内告知ページ作成
-                         </span></li>
-                        <li><h5>スマートフォン向けソーシャルRPG（未発表）</h5>
-                         <span>
-                            使用ツール・言語：Adobe Photoshop、Unity、OPTPIX SpriteStudio<br>
-                            2Dキャラクターモデル・モーション、演出アニメーション作成
-                         </span></li>
-                        <li><h5>PC向けアクションゲーム</h5>
-                         <span>
-                            使用ツール・言語：Adobe Photoshop<br>
-                            2Dキャラクター原案、モーション案作成、仕様書作成
-                         </span></li>
-                        <li><h5>スマートフォン向けアクションゲーム</h5>
-                         <span>
-                            使用ツール・言語：Adobe Photoshop<br>
-                            タイトル画面、2Dキャラクター作成、UI設計/デザイン
-                         </span></li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-        <section class="skillsheet">
-         <h4 class="item">スキルシート</h4>
-         <p>※上記の内容をさらに詳細に記載したPDFが別ウインドウで開きます。</p>
-         <div class="download">
-            <!--a href="https://drive.google.com/file/d/1HHOp4KlWIJQj0x5quGOdxXxf7SoOKuAD/view?usp=sharing" target="_blank">WEBスキルシート</a-->
-            <a href="https://docs.google.com/spreadsheets/d/1-EmOFuE6qqB5T80GRx4GI83lKEjWEOiC/edit?usp=sharing&ouid=118431319089068162907&rtpof=true&sd=true" target="_blank">-WEBスキルシート-</a>
-            <a href="https://drive.google.com/file/d/1UvkDJTtZkJmZ4bKYUtvX_UDD0aHUxMlI/view?usp=sharing" target="_blank">-ゲームスキルシート-</a>
+      <div class="motion-tile" data-lottie="lottie/page_transition.json" data-caption="ページ遷移アニメーション">
+        <div class="phone-frame">
+          <div class="lottie-target"></div>
+          <div class="motion-fallback">
+            <i class="ti ti-arrows-shuffle" aria-hidden="true"></i>
+            <span>準備中</span>
+          </div>
         </div>
-        </section>
- 
-    </section>
-  </section>
-  <section id="work" class="work container" data-section-name="Work">
-    <section class="contents">
-        <section class="description">
-            <h2><img src="img/title_work.png" alt="WORK"></h2>
-            <h3>制作実績</h3>
-            <div class="work__result">
-                <ul class="work__list">
-                    <li>金属加工会社 WEBサイト</li>
-                    <li>レンタルファーム WEBサイト</li>
-                    <li>介護事務所 WEBサイト</li>
-                    <li>政治家 活動用特設サイト</li>
-                    <li>中古高級腕時計販売店 WEBサイト</li>
-                    <li>ゲーム会社 商品紹介LP</li>
-                    <li>ゲーム会社 商品公式サイト</li>
-                    <li>高級肉通販ショップ 楽天市場内販売ページ</li>
-                    <li>飲食店 店舗別WEBサイト</li>
-                    <li>美容室 WEBサイト・Facebookページ</li>
-                    <li>美容エステサロン WEBサイト</li>
-                    <li></li>
-                </ul>
-            </div>
-            <h3>サンプル</h3>
-            <p>サムネイルをクリック（タップ）すると詳細がご覧になれます。</p>
-        </section>
-        <section id="website" class="inner-box">
-            <h4>WEBSITE</h4>
-            <section class="overview " >
-                <nav class="thumb slider-nav">
-                    <div>
-                     <img src="img/bit_record.png" alt="">
-                    </div>
-                    <div>
-                     <img src="img/thumb_wp_radio.png" alt="">
-                    </div>
-                    <div>
-                     <img src="img/thumb_akebi.png" alt="">
-                    </div>
-                    <div>
-                     <img src="img/thumb_neumorphic.png" alt="">
-                    </div>
-                  </nav>
-                <div class="image slider-for">
-                    <article>
-                        <a href="img/bit_record.png" data-title="<h3>Radio KO-DY</h3><p>コンセプト：架空のBit Tune系アーティストサイト。</p><p>作業時間：80時間</p><section class=&#34;tags&#34;><span>HTML/CSS</span><span>js</span></section><section class=&#34;link&#34;><a href=&#34;https://sasaki.webwork/bit_record&#34;>WEBサイトを開く</a></section>" data-lightbox=”wp-bit”><img src="img/bit_record.png" alt="" /></a>
-                    </article>radio_ko-dy
-                    <article>
-                        <a href="img/wp_radio.png" data-title="<h3>Radio KO-DY</h3><p>コンセプト：架空のコミュニティラジオサイト。</p><p>作業時間：130時間</p><section class=&#34;tags&#34;><span>HTML/CSS</span><span>js</span><span>WordPress</span></section><section class=&#34;link&#34;><a href=&#34;https://intp.site/877/wp-radio/&#34;>WEBサイトを開く</a></section>" data-lightbox=”wp-radio”><img src="img/wp_radio_medium.png" alt="" /></a>
-                    </article>
-                    <article>
-                        <a href="img/akebi.png" data-title="<h3>あけびの村</h3><p>コンセプト：架空の自治体サイト。</p><p>作業時間：30時間</p><section class=&#34;tags&#34;><span>HTML/CSS</span><span>js</span></section><section class=&#34;link&#34;><a href=&#34;https://sasakiweb.work/akebino/&#34;>WEBサイトを開く</a></section>" data-lightbox=”akebino”>
-                            <section>
-                             <!--section class="description">
-                                 <h3>あけびの村WEBサイト</h3>
-                                 <ul>
-                                    <li>使用言語：HTML/CSS</li>
-                                 </ul>
-                             </section-->
-                                <img src="img/akebi_medium.png" alt="">
-                            </section>
-                        </a>
-                    </article>
-                    <article>
-                        <a href="img/web_neumorphic.png" data-title="<h3>Radio KO-DY</h3><p>ニューモーフィックデザインUI紹介ページ</p><p>作業時間：3時間</p><section class=&#34;tags&#34;><span>HTML/CSS</span><span>js</span><span>WordPress</span></section><section class=&#34;link&#34;><a href=&#34;https://sasakiweb.work/test08/&#34;>WEBサイトを開く</a></section>" data-lightbox=”neumorphic”><img src="img/web_neumorphic_medium.png" alt="" /></a>
-                    </article>                  </div>
-            </section>
-        </section>
-        <section id="bunner"  class="inner-box">
-            <h4>BUNNER</h4>
-            <section class="overview" >
-                <nav class="thumb slider-nav">
-                    <div>
-                      <img src="img/banner/gold_hit.png" alt="黄金宝くじ">
-                    </div>
-                    <div>
-                      <img src="img/banner/christmas.png" alt="クリスマス">
-                    </div>
-                    <div>
-                      <img src="img/banner_hanabi_300x250.png" alt="">
-                    </div>
-                    <div>
-                      <img src="img/banner_300x250.png" alt="">
-                    </div>
-                    <div>
-                      <img src="img/banner_300x600.png" alt="">
-                    </div>
-                  </nav>
-                <div class="image slider-for">
-                    <article>
-                        <a href="img/banner/gold_hit.png" data-title="<h3>黄金宝くじ</h3><p>コンセプト：架空の宝くじ</p><p>作業時間：1時間</p><section class=&#34;tags&#34;><span>Illustrator</span></section>" data-lightbox=”light”><img src="img/banner/gold_hit.png" alt="バナーサンプル：黄金宝くじ"></a>
-                    </article>
-                    <article>
-                        <a href="img/banner/christmas.png" data-title="<h3>クリスマス</h3><p>コンセプト：架空の宝くじ</p><p>作業時間：1時間</p><section class=&#34;tags&#34;><span>Illustrator</span></section>" data-lightbox=”light”><img src="img/banner/christmas.png" alt="バナーサンプル：クリスマス"></a>
-                    </article>
-                    <article>
-                        <a href="img/banner_hanabi_300x250.png" data-title="<h3>原羽田川花火大会</h3><p>コンセプト：地方の花火大会のお知らせ</p><p>作業時間：1時間</p><section class=&#34;tags&#34;><span>Illustrator</span></section>" data-lightbox=”light”><img src="img/banner_hanabi_300x250.png" alt="バナーサンプル：原羽田川花火大会"></a>
-                    </article>
-                    <article>
-                        <a href="img/banner_300x250.png" data-title="<h3>サクセスTOEIC</h3><p>コンセプト：オンライン英会話講座サービスのWEBバナー広告</p><p>作業時間：3時間</p><section class=&#34;tags&#34;><span>Illustrator</span></section>" data-lightbox=”light”><img src="img/banner_300x250.png" alt="バナーサンプル：サクセスTOEIC"></a>
-                    </article>
-                    <article>
-                        <a href="img/banner_300x600.png" data-title="<h3>camel flask coffee</h3><p>コンセプト：新宿に店舗を構える新興コーヒーショップのWEBバナー広告</p><p>作業時間：3時間</p><section class=&#34;tags&#34;><span>Illustrator</span></section>" data-lightbox=”light”><img src="img/banner_300x600.png" alt=""></a>
-                    </article>
-                  </div>
-            </section>
-        </section>
-        <section id="dtp"  class="inner-box">
-            <h4>DTP</h4>
-            <section class="overview" >
-                <nav class="thumb slider-nav">
-                    <div>
-                      <img src="img/thumb_coffee_flyer.jpg" alt="">
-                    </div>
-                    <div>
-                      <img src="img/thumb_coffee_flyer.jpg" alt="">
-                    </div>
-                    <div>
-                      <img src="img/thumb_coffee_flyer.jpg" alt="">
-                    </div>
-                  </nav>
-                <div class="image slider-for">
-                    <article>
-                        <a href="img/sample_flyer.jpg" data-title="<h3>喫茶店フライヤー</h3><p>コンセプト：喫茶店の新規開店のお知らせ</p><p>作業時間：1時間</p><section class=&#34;tags&#34;><span>Illustrator</span></section>" data-lightbox=”flyer”><img src="img/thumb_coffee_flyer.jpg" alt="フライヤーサンプル：喫茶店"></a>
-                    </article>
-                    <article>
-                        <a href="img/sample_flyer.jpg" data-title="<h3>喫茶店フライヤー</h3><p>コンセプト：喫茶店の新規開店のお知らせ</p><p>作業時間：1時間</p><section class=&#34;tags&#34;><span>Illustrator</span></section>" data-lightbox=”flyer”><img src="img/thumb_coffee_flyer.jpg" alt="フライヤーサンプル：喫茶店"></a>
-                    </article>
-                    <article>
-                        <a href="img/sample_flyer.jpg" data-title="<h3>喫茶店フライヤー</h3><p>コンセプト：喫茶店の新規開店のお知らせ</p><p>作業時間：1時間</p><section class=&#34;tags&#34;><span>Illustrator</span></section>" data-lightbox=”flyer”><img src="img/thumb_coffee_flyer.jpg" alt="フライヤーサンプル：喫茶店"></a>
-                    </article>
-                  </div>
-            </section>
-        </section>
-    </section>
-  </section>
-  <section id="contact" class="contact container" data-section-name="Contact">
-    <section class="contents">
-        <section class="description">
-            <h2><img src="img/title_contact.png" alt="CONTACT"></h2>
-            <h3>お問い合わせ</h3>
-            <p>メールフォームより必要事項を記載していただき、ご送信ください。<br>
-                ２〜３営業日以内にご連絡させていただきます。
-            </p> 
-        </section>
-        <section class="form">
-            <div id="formWrap">
-                <form method="post" action="php/mail.php">
-                    <div id="form-name">
-                        <label for="user-name">お名前<span class="caution">※必須</span></label>
-                        <input size="20" type="text" name="お名前" id="user-name" /> 
-                    </div>
-                    <div id="form-mail">
-                        <label for="user-mail">メールアドレス<span class="caution">※必須</span></label>
-                        <input size="20" type="text" name="メールアドレス" id="user-mail" /> 
-                    </div>
-                    <div id="form-message">
-                        <label for="user-message">お問い合わせ内容</label>
-                        <textarea name="お問い合わせ内容" id="user-message" cols="30" rows="10"></textarea>
-                    </div>
-                
-                  <p>
-                    <input type="submit" value="確認" /><input type="reset" value="リセット" />
-                  </p>
-                </form>
-                <p>※IPアドレスを記録しております。 <br>
-                   いたずらや嫌がらせ等はご遠慮ください</p>
-              </div>
+        <div class="motion-name">ページ遷移</div>
+      </div>
 
+      <div class="motion-tile" data-lottie="lottie/loading.json" data-caption="ローディング表現">
+        <div class="phone-frame">
+          <div class="lottie-target"></div>
+          <div class="motion-fallback">
+            <i class="ti ti-loader-2" aria-hidden="true"></i>
+            <span>準備中</span>
+          </div>
+        </div>
+        <div class="motion-name">ローディング</div>
+      </div>
 
-        </section>
-       
-    </section>
-  </section-->
- </main>
- <div class="gotop"><a href="#home">GOTOP</a></div>
-<footer>
-    <section class="copyright">
-        <p>SASAKI WEBWORK All rights reserved.</p>
-    </section>
-</footer>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="js/slick.js"></script>
-<script type="text/javascript" src="js/scripts.js"></script>
-<script type="text/javascript" src="js/smooth-scroll.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.21/jquery.scrollify.min.js"></script>
-<!--script type="text/javascript" src="js/scrolify.js"></script-->
-<script type="text/javascript" src="js/lightbox.js"></script>
-<script type="text/javascript" src="js/modal.js"></script>
+    </div>
+  </section>
+
+  <footer>
+    <!--div class="contact-lines">
+      <div class="section-label">Contact</div>
+      <div class="contact-field">お名前</div>
+      <div class="contact-field">メールアドレス</div>
+      <div class="contact-field short">ご相談内容</div>
+    </div-->
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xojorbop" method="POST">
+      <div class="contact-title">Contact</div>
+      <input class="contact-field" type="text" name="name" placeholder="お名前" required>
+      <input class="contact-field" type="email" name="email" placeholder="メールアドレス" required>
+      <textarea class="contact-field" name="message" placeholder="ご相談内容" rows="4" required></textarea>
+      <button type="submit" class="contact-submit">
+        <i class="ti ti-send" aria-hidden="true"></i>送信する
+      </button>
+      <div class="contact-status" id="contactStatus"></div>
+    </form>
+    <div class="pdf-buttons">
+      <div class="pdf-btn">
+        <a href="https://docs.google.com/spreadsheets/d/1-EmOFuE6qqB5T80GRx4GI83lKEjWEOiC/edit?usp=sharing&ouid=118431319089068162907&rtpof=true&sd=true" target="_blank">
+          <i class="ti ti-download" aria-hidden="true">WEBスキルシート PDF</i>
+        </a>
+      </div>
+      <div class="pdf-btn">
+        <a href="https://drive.google.com/file/d/1UvkDJTtZkJmZ4bKYUtvX_UDD0aHUxMlI/view?usp=sharing" target="_blank">
+          <i class="ti ti-download" aria-hidden="true">ゲームスキルシート PDF</i>
+        </a>
+        </a>
+      </div>
+    </div>
+    <div class="sns">
+      <i class="ti ti-brand-github" aria-hidden="true"></i>
+      <i class="ti ti-brand-x" aria-hidden="true"></i>
+      <i class="ti ti-mail" aria-hidden="true"></i>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Banner lightbox (images) -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+<!-- Motion lightbox (Lottie, enlarged phone frame) -->
+<div class="lightbox-overlay" id="motionLightboxOverlay">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="motionLightboxClose" aria-label="閉じる">&times;</button>
+    <div class="phone-frame phone-frame-lg" id="motionLightboxFrame">
+      <div class="lottie-target" id="motionLightboxTarget"></div>
+    </div>
+    <div class="lightbox-caption" id="motionLightboxCaption"></div>
+  </div>
+</div>
+
+<div class="gotop">
+  <a href="#top">Go Top</a>
+</div>
+
+<script>
+  function updateModeFlag(){
+    var isDesktop = window.innerWidth > 768;
+    document.querySelectorAll('.mode-mobile').forEach(function(el){ el.style.display = isDesktop ? 'none' : 'inline'; });
+    document.querySelectorAll('.mode-desktop').forEach(function(el){ el.style.display = isDesktop ? 'inline' : 'none'; });
+  }
+  window.addEventListener('resize', updateModeFlag);
+  updateModeFlag();
+
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var mobileNavMenu = document.getElementById('mobileNavMenu');
+  hamburgerBtn.addEventListener('click', function(){
+    mobileNavMenu.classList.toggle('open');
+    hamburgerBtn.classList.toggle('ti-menu-2');
+    hamburgerBtn.classList.toggle('ti-x');
+  });
+  window.addEventListener('resize', function(){
+    if (window.innerWidth > 768){ mobileNavMenu.classList.remove('open'); }
+  });
+
+  document.querySelectorAll('[data-carousel]').forEach(function(carousel){
+    var track = carousel.querySelector('.carousel-track');
+    var slides = Array.prototype.slice.call(track.children);
+    var dotsWrap = carousel.querySelector('.carousel-dots');
+    var index = 0;
+    var timer;
+
+    if (slides.length > 1){
+      slides.forEach(function(_, i){
+        var dot = document.createElement('button');
+        if (i === 0) dot.classList.add('active');
+        dot.setAttribute('aria-label', 'スライド ' + (i + 1));
+        dot.addEventListener('click', function(){ goTo(i); resetTimer(); });
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    function goTo(i){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      Array.prototype.slice.call(dotsWrap.children).forEach(function(d, di){
+        d.classList.toggle('active', di === index);
+      });
+    }
+
+    function resetTimer(){
+      if (slides.length <= 1) return;
+      clearInterval(timer);
+      timer = setInterval(function(){ goTo(index + 1); }, 3500);
+    }
+
+    resetTimer();
+  });
+
+  // Banner lightbox
+  var lightboxOverlay = document.getElementById('lightboxOverlay');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxCaption = document.getElementById('lightboxCaption');
+  var lightboxClose = document.getElementById('lightboxClose');
+
+  function openLightbox(src, caption){
+    lightboxImg.src = src;
+    lightboxImg.alt = caption;
+    lightboxCaption.textContent = caption;
+    lightboxOverlay.classList.add('open');
+  }
+  function closeLightbox(){
+    lightboxOverlay.classList.remove('open');
+    lightboxImg.src = '';
+  }
+
+  document.querySelectorAll('.cell.gif-banner .carousel-slide img, .cell.static-banner .carousel-slide img')
+    .forEach(function(img){
+      img.addEventListener('click', function(){
+        var captionEl = img.closest('.carousel-slide').querySelector('.sub');
+        openLightbox(img.src, captionEl ? captionEl.textContent : img.alt);
+      });
+    });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxOverlay.addEventListener('click', function(e){
+    if (e.target === lightboxOverlay) closeLightbox();
+  });
+
+  // UI Motion (Lottie) — placeholder scaffold.
+  // Each tile tries to load a .json that likely doesn't exist yet; on failure
+  // the fallback icon/label (already in the DOM) simply stays visible.
+  var motionLightboxOverlay = document.getElementById('motionLightboxOverlay');
+  var motionLightboxTarget = document.getElementById('motionLightboxTarget');
+  var motionLightboxCaption = document.getElementById('motionLightboxCaption');
+  var motionLightboxClose = document.getElementById('motionLightboxClose');
+  var largeMotionAnim = null;
+
+  if (window.lottie){
+    document.querySelectorAll('.motion-tile').forEach(function(tile){
+      var target = tile.querySelector('.lottie-target');
+      var fallback = tile.querySelector('.motion-fallback');
+      var path = tile.getAttribute('data-lottie');
+
+      var anim = lottie.loadAnimation({
+        container: target,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: path
+      });
+
+      anim.addEventListener('data_ready', function(){
+        if (fallback) fallback.style.display = 'none';
+      });
+      anim.addEventListener('data_failed', function(){
+        if (fallback) fallback.style.display = 'flex';
+      });
+
+      tile.addEventListener('click', function(){
+        openMotionLightbox(path, tile.getAttribute('data-caption'));
+      });
+    });
+  }
+
+  function openMotionLightbox(path, caption){
+    motionLightboxTarget.innerHTML = '';
+    if (largeMotionAnim){ largeMotionAnim.destroy(); largeMotionAnim = null; }
+    if (window.lottie){
+      largeMotionAnim = lottie.loadAnimation({
+        container: motionLightboxTarget,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: path
+      });
+    }
+    motionLightboxCaption.textContent = caption;
+    motionLightboxOverlay.classList.add('open');
+  }
+  function closeMotionLightbox(){
+    motionLightboxOverlay.classList.remove('open');
+    if (largeMotionAnim){ largeMotionAnim.destroy(); largeMotionAnim = null; }
+    motionLightboxTarget.innerHTML = '';
+  }
+  motionLightboxClose.addEventListener('click', closeMotionLightbox);
+  motionLightboxOverlay.addEventListener('click', function(e){
+    if (e.target === motionLightboxOverlay) closeMotionLightbox();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){
+      closeLightbox();
+      closeMotionLightbox();
+    }
+  });
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm){
+    var contactStatus = document.getElementById('contactStatus');
+    var contactSubmitBtn = contactForm.querySelector('.contact-submit');
+
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      contactStatus.textContent = '';
+      contactStatus.className = 'contact-status';
+      contactSubmitBtn.disabled = true;
+      contactSubmitBtn.textContent = '送信中…';
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res){
+        if (res.ok){
+          contactStatus.textContent = '送信しました。ご連絡ありがとうございます。';
+          contactStatus.classList.add('success');
+          contactForm.reset();
+        } else {
+          contactStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+          contactStatus.classList.add('error');
+        }
+      }).catch(function(){
+        contactStatus.textContent = '送信に失敗しました。通信環境をご確認ください。';
+        contactStatus.classList.add('error');
+      }).finally(function(){
+        contactSubmitBtn.disabled = false;
+        contactSubmitBtn.innerHTML = '<i class="ti ti-send" aria-hidden="true"></i>送信する';
+      });
+    });
+  }
+  // スムーズスクロール（グローバルナビ・GOTOP共通）
+  function smoothScrollTo(targetY, duration){
+    var startY = window.scrollY;
+    var diff = targetY - startY;
+    var startTime = null;
+
+    function step(timestamp){
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = progress < 0.5
+        ? 2 * progress * progress
+        : -1 + (4 - 2 * progress) * progress; // easeInOutQuad
+      window.scrollTo(0, startY + diff * eased);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  document.querySelectorAll('nav.desktop-nav a, .mobile-nav-menu a, .gotop a').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var href = link.getAttribute('href');
+      if (href && href.charAt(0) === '#'){
+        var targetEl = document.querySelector(href);
+        if (targetEl){
+          e.preventDefault();
+          var targetY = targetEl.getBoundingClientRect().top + window.scrollY;
+          smoothScrollTo(targetY, 700);
+          if (typeof mobileNavMenu !== 'undefined' && mobileNavMenu){
+            mobileNavMenu.classList.remove('open');
+          }
+        }
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
