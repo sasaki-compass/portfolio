@@ -16,7 +16,8 @@
   --border-strong:#b9b9c0;
   --text-primary:#1f1f23;
   --text-secondary:#5b5b63;
-  --text-muted:#9a9aa2;
+  /*--text-muted:#9a9aa2;*/
+  --text-muted:#59595e;
   --accent:#6b6bf2;
   /*
   --radius:8px;
@@ -295,7 +296,7 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 .sample-thumb{
   width:100%; 
   /*height:80px; */
-  height:max(10vw,300px); 
+  height:min(50vw,300px); 
   border:1px dashed var(--border-strong); border-radius:var(--radius);
   display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:16px;
   overflow:hidden;
@@ -637,28 +638,30 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
       <div class="work-body">
         <div class="work-title">アーケードゲーム公式サイト作成</div>
         <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
-          アーケードゲームの新規作成。デザイン提案からコーディング、納品やマニュアル作成までを担当。CSSアニメーションなども担当</div>
+          アーケードゲームの公式LP新規作成。デザイン提案からコーディング、納品やマニュアル作成までを担当。CSSアニメーションなども担当</div>
         <div class="tags">
           <span class="tag">デザイン／コーディング</span>
           <span class="tag">HTML/CSS</span>
           <span class="tag">JavaScript</span>
         </div>
-        <div class="sample-link"><a target="_blank" href="https://enh-gapporisushi.com/" ><i class="ti ti-external-link" aria-hidden="true">Site link</i></a></div>
       </div>
     </div>
     
     <div class="work-card">
-      <div class="work-thumb"><img src="img/thumb/web_rentalfarm.png" alt="アーケードゲームLPサイト" class="ti ti-photo" aria-hidden="true"></div>
+      <div class="work-thumb">
+        <a target="_blank" href="https://tuku-shinbo.com/" >
+          <img src="img/thumb/web_rentalfarm.png" alt="レンタルファーム サイト作成" class="ti ti-photo" aria-hidden="true">
+        </a>
+      </div>
       <div class="work-body">
         <div class="work-title">レンタルファーム サイト作成</div>
         <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
-          アーケードゲームの新規作成。デザイン提案からコーディング、納品やマニュアル作成までを担当。CSSアニメーションなども担当</div>
+          レンタルファームのサイトリニューアル。デザイン提案からコーディング、納品やマニュアル作成までを担当。</div>
         <div class="tags">
           <span class="tag">デザイン／コーディング</span>
           <span class="tag">HTML/CSS</span>
           <span class="tag">JavaScript</span>
         </div>
-        <div class="sample-link"><a target="_blank" href="https://tuku-shinbo.com/" ><i class="ti ti-external-link" aria-hidden="true">Site link</i></a></div>
       </div>
     </div>
 
@@ -668,11 +671,19 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
     <div class="section-label">サンプル制作 <span class="badge">実在しないデモ</span></div>
     <div class="sample-grid">
       <div class="sample-card">
-        <div class="sample-thumb"><img src="img/thumb_wp_radio.png" alt="架空ラジオ局サイト"></div>
+        <div class="sample-thumb">
+          <a target="_blank" href="https://sasakiweb.work/radio_ko-dy/" >
+          <img src="img/thumb_wp_radio.png" alt="架空ラジオ局サイト">
+        </a>
+        </div>
         <div class="sample-name">架空ラジオ局サイト</div>
       </div>
       <div class="sample-card">
-        <div class="sample-thumb"><img src="img/thumb_akebi.png" alt="架空自治体サイト"></div>
+        <div class="sample-thumb">
+          <a target="_blank" href="https://sasakiweb.work/akebino/" >
+            <img src="img/thumb_akebi.png" alt="架空自治体サイト">
+          </a>
+        </div>
         <div class="sample-name">架空自治体サイト</div>
       </div>
     </div>
@@ -682,21 +693,22 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
     <div class="section-label">Figma gallery — デザイン制作事例</div>
     <div class="figma-grid">
       <div class="figma-card">
-        <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
-        <div class="figma-name">例：ECサイト UIデザイン案</div>
+        <div class="figma-thumb">
+          <a target="_blank" href="https://www.figma.com/design/1lncGE2rWrhtY1x13kXJan/%E7%AB%B6%E9%A6%AC%E4%BA%88%E6%83%B3%E3%82%B5%E3%82%A4%E3%83%88%E3%83%BB%E3%83%88%E3%83%83%E3%82%AB?t=DzphC3jyR2ds1t0F-1">
+            <img src="img/thumb/figma_tokka.png" class="ti ti-brand-figma" aria-hidden="true"/>
+          </a>
+        </div>
+        <div class="figma-name">競馬予想サイト ログイン前/後デザイン案</div>
       </div>
       <div class="figma-card">
-        <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
-        <div class="figma-name">例：コーポレートサイト ワイヤーフレーム</div>
+        <div class="figma-thumb">
+          <a target="_blank" href="https://www.figma.com/design/yi0VHjvIQ1dsGd8TJvK5PD/%E3%81%86%E3%81%BE%E3%82%B9%E3%82%B0%EF%BC%81?node-id=0-1&t=485HZH7O6jPzfZcS-1">
+            <img src="img/thumb/figma_umasugu.png" class="ti ti-brand-figma" aria-hidden="true"/>
+          </a>
+        </div>
+        <div class="figma-name">競馬予想サイト ログイン前LPデザイン案</div>
       </div>
-      <div class="figma-card">
-        <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
-        <div class="figma-name">例：モバイルアプリ UIキット</div>
-      </div>
-      <div class="figma-card">
-        <div class="figma-thumb"><i class="ti ti-brand-figma" aria-hidden="true"></i></div>
-        <div class="figma-name">例：LPデザイン案</div>
-      </div>
+      
     </div>
   </section>
 
