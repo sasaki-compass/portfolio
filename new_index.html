@@ -641,7 +641,8 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
         <div class="work-title">某金融コーポレートサイト リニューアル</div>
         <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">企業サイトのリニューアル案件。旧CMSのサポート終了に伴い、新規CMS（ヘッドレスCMS+SSG）への移行にあたってのデータ整備を担当。</div>
         <div class="tags">
-          <span class="tag">コーディング／UI設計</span>
+          <span class="tag">コーディング</span>
+          <span class="tag">UI設計</span>
           <span class="tag">Directus</span>
           <span class="tag">JSX</span>
         </div>
@@ -655,7 +656,7 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
         <div class="work-title">某リクルートサイト 更新</div>
         <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">既存の就職情報マッチングサイトの更新案件。WEB制作チーム内で、既存のサイトデザインに合わせて新規作成する各画面のデザインを担当。</div>
         <div class="tags">
-          <span class="tag">デザイン</span>
+          <span class="tag">デザイン／UI設計</span>
           <span class="tag">Figma</span>
         </div>
         <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
@@ -670,16 +671,18 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
           競馬予想情報提供サイトの制作案件。独自CMSに合わせPHPコーディングを担当。
         </div>
         <div class="tags">
-          <span class="tag">コーディング／UI設計</span>
-          <span class="tag">Directus</span>
-          <span class="tag">JSX</span>
+          <span class="tag">デザイン／UI設計</span>
+          <span class="tag">コーディング</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">PHP</span>
         </div>
         <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
       </div>
     </div>
     
     <div class="work-card">
-      <div class="work-thumb"><img src="img/thumb/blacksmith.svg" alt="競馬予想情報提供サイト" class=" work-icon ti ti-photo" aria-hidden="true"></div>
+      <div class="work-thumb"><img src="img/thumb/blacksmith.svg" alt="金属加工サービス サイト更新" class=" work-icon ti ti-photo" aria-hidden="true"></div>
       <div class="work-body">
         <div class="work-title">金属加工サービス サイト更新</div>
         <div style="font-size:11px; color:var(--text-secondary); line-height:1.6;">
@@ -687,8 +690,9 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
         </div>
         <div class="tags">
           <span class="tag">コーディング／UI設計</span>
-          <span class="tag">Directus</span>
-          <span class="tag">JSX</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">PHP</span>
         </div>
         <!--div class="figma-link"><i class="ti ti-external-link" aria-hidden="true"></i>Figma link</div-->
       </div>
@@ -1067,7 +1071,7 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
     var startY = window.scrollY;
     var diff = targetY - startY;
     var startTime = null;
-  
+
     function step(timestamp){
       if (!startTime) startTime = timestamp;
       var progress = Math.min((timestamp - startTime) / duration, 1);
@@ -1079,7 +1083,7 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
     }
     requestAnimationFrame(step);
   }
-  
+
   document.querySelectorAll('nav.desktop-nav a, .mobile-nav-menu a, .gotop a').forEach(function(link){
     link.addEventListener('click', function(e){
       var href = link.getAttribute('href');
