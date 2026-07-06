@@ -111,6 +111,10 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
   height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center;
   gap:8px; border-bottom:1px solid var(--border); text-align:center; padding:0 16px;
   background:url(img/fv_ai.png) no-repeat center/cover;
+  text-shadow: 2px 0px min(1vw, 4px) #ffffff,
+  0px 2px min(1vw, 4px) #ffffff,
+  0px 0px min(1vw, 4px) #ffffff,
+  0px -2px min(1vw, 4px) #FFFFFF;
 }
 .fv .eyebrow{ font-size:11px; color:var(--text-muted); letter-spacing:1px; }
 .fv .name{ font-size:28px; font-weight:600; }
@@ -171,6 +175,20 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
 }
 .contact-field.short{ width:60%; }
 
+.contact-form{ display:flex; flex-direction:column; gap:6px; }
+.contact-form textarea.contact-field{ resize:vertical; font-family:inherit; }
+.contact-submit{
+  border:1px solid var(--border-strong); border-radius:var(--radius);
+  padding:8px 14px; font-size:11px; color:var(--text-secondary);
+  background:var(--surface-0); cursor:pointer;
+  display:flex; align-items:center; gap:6px; width:fit-content;
+}
+.contact-submit:hover{ background:var(--surface-2); }
+.contact-submit:disabled{ opacity:.6; cursor:not-allowed; }
+.contact-status{ font-size:11px; margin-top:2px; }
+.contact-status.success{ color:#1a8f4c; }
+.contact-status.error{ color:#c0392b; }
+
 /* ---------- Banner carousel (GIF / static) ---------- */
 .cell.gif-banner,
 .cell.static-banner{
@@ -178,6 +196,7 @@ nav.desktop-nav{ display:none; gap:20px; font-size:12px; color:var(--text-second
   justify-content:flex-start;
   padding:10px;
   gap:6px;
+  grid-column: 1 / span 2;
 }
 .banner-carousel{
   position:relative;
@@ -755,12 +774,22 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
   </section>
 
   <footer>
-    <div class="contact-lines">
+    <!--div class="contact-lines">
       <div class="section-label">Contact</div>
       <div class="contact-field">お名前</div>
       <div class="contact-field">メールアドレス</div>
       <div class="contact-field short">ご相談内容</div>
-    </div>
+    </div-->
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xojorbop" method="POST">
+      <div class="contact-title">Contact</div>
+      <input class="contact-field" type="text" name="name" placeholder="お名前" required>
+      <input class="contact-field" type="email" name="email" placeholder="メールアドレス" required>
+      <textarea class="contact-field short" name="message" placeholder="ご相談内容" rows="4" required></textarea>
+      <button type="submit" class="contact-submit">
+        <i class="ti ti-send" aria-hidden="true"></i>送信する
+      </button>
+      <div class="contact-status" id="contactStatus"></div>
+    </form>
     <div class="pdf-buttons">
       <div class="pdf-btn">
         <a href="https://docs.google.com/spreadsheets/d/1-EmOFuE6qqB5T80GRx4GI83lKEjWEOiC/edit?usp=sharing&ouid=118431319089068162907&rtpof=true&sd=true" target="_blank">
@@ -958,6 +987,40 @@ footer{ padding:20px 16px; display:flex; flex-direction:column; gap:14px; backgr
       closeMotionLightbox();
     }
   });
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm){
+    var contactStatus = document.getElementById('contactStatus');
+    var contactSubmitBtn = contactForm.querySelector('.contact-submit');
+
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      contactStatus.textContent = '';
+      contactStatus.className = 'contact-status';
+      contactSubmitBtn.disabled = true;
+      contactSubmitBtn.textContent = '送信中…';
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res){
+        if (res.ok){
+          contactStatus.textContent = '送信しました。ご連絡ありがとうございます。';
+          contactStatus.classList.add('success');
+          contactForm.reset();
+        } else {
+          contactStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+          contactStatus.classList.add('error');
+        }
+      }).catch(function(){
+        contactStatus.textContent = '送信に失敗しました。通信環境をご確認ください。';
+        contactStatus.classList.add('error');
+      }).finally(function(){
+        contactSubmitBtn.disabled = false;
+        contactSubmitBtn.innerHTML = '<i class="ti ti-send" aria-hidden="true"></i>送信する';
+      });
+    });
+  }
 </script>
 
 </body>
